@@ -1,0 +1,15 @@
+# Raw recordings & the superseded first export — too big for git.
+# The canonical dataset ships to Colab as data.zip on Google Drive.
+dataset_full_01/
+dataset_turtlebot/
+
+# Heavy payload of the canonical dataset (3465 JPEGs, ~340 MB) — in data.zip only.
+data/camera/images/
+
+# Packaging artifact (gets uploaded to Google Drive, not git)
+data.zip
+
+# Python / notebook junk
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

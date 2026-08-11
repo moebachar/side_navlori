@@ -1,0 +1,12 @@
+# Georeferencing for map.png (raw lidar hit-count grid, grayscale).
+# Pixel values: 255 = no returns observed; 204/153/102/51/0 = 1..5+ hits.
+# PNG row 0 is the TOP of the map: world_y = origin_y + (height_px - 1 - row) * resolution
+#                                  world_x = origin_x + col * resolution
+# origin_xy is the lower-left corner of the bottom-left pixel.
+# For a decorated preview with axes/trajectory see map_preview.png (not georeferenced).
+image: map.png
+resolution: 0.01
+origin_xy: [-7.4866, -10.8124]
+width_px: 2161
+height_px: 1896
+frame: map (= odom frame aligned over the initial stationary segment; see method.md)

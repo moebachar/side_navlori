@@ -1,0 +1,69 @@
+# Sensor extrinsics for the side_navlori TurtleBot3 Waffle Pi dataset.
+# Source: /tf_static of rosbag dataset_full_01 (values verbatim, full precision).
+# Conventions: REP-103. base_footprint sits on the ground plane under the robot
+# center; x forward, y left, z up; quaternions are [x, y, z, w].
+# 'flattened' entries are the composed transform base_footprint -> frame.
+
+raw_static_tf:
+  - parent: base_footprint
+    child: base_link
+    translation_m: [0, 0, 0.01]
+    quaternion_xyzw: [0, 0, 0, 1]
+  - parent: base_link
+    child: base_scan
+    translation_m: [-0.064, 0, 0.122]
+    quaternion_xyzw: [0, 0, 0, 1]
+  - parent: base_link
+    child: camera_link
+    translation_m: [0.073, -0.011, 0.084]
+    quaternion_xyzw: [0, 0, 0, 1]
+  - parent: base_link
+    child: caster_back_left_link
+    translation_m: [-0.177, 0.064, -0.004]
+    quaternion_xyzw: [-0.7068251811, 0, 0, 0.7073882692]
+  - parent: base_link
+    child: caster_back_right_link
+    translation_m: [-0.177, -0.064, -0.004]
+    quaternion_xyzw: [-0.7068251811, 0, 0, 0.7073882692]
+  - parent: base_link
+    child: imu_link
+    translation_m: [0, 0, 0.068]
+    quaternion_xyzw: [0, 0, 0, 1]
+  - parent: camera_link
+    child: camera_rgb_frame
+    translation_m: [0.003, 0.011, 0.009]
+    quaternion_xyzw: [0, 0, 0, 1]
+  - parent: camera_rgb_frame
+    child: camera_rgb_optical_frame
+    translation_m: [0, 0, 0]
+    quaternion_xyzw: [-0.4999998415, 0.4996018366, -0.4999998415, 0.5003981634]
+
+flattened_to_base_footprint:
+  camera_rgb_optical_frame:
+    translation_m: [0.076, 0, 0.103]
+    quaternion_xyzw: [-0.4999998415, 0.4996018366, -0.4999998415, 0.5003981634]
+    # optical convention: z forward (viewing axis), x right, y down.
+    # NOTE: the URDF quaternion is a slightly rounded version of the exact
+    # optical rotation (-0.5, 0.5, -0.5, 0.5); the difference is ~0.065 deg.
+  camera_rgb_frame:
+    translation_m: [0.076, 0, 0.103]
+    quaternion_xyzw: [0, 0, 0, 1]
+  base_scan:
+    translation_m: [-0.064, 0, 0.132]
+    quaternion_xyzw: [0, 0, 0, 1]
+    # lidar frame: x forward, angles CCW about +z (verified empirically).
+  imu_link:
+    translation_m: [0, 0, 0.078]
+    quaternion_xyzw: [0, 0, 0, 1]
+  base_link:
+    translation_m: [0, 0, 0.01]
+    quaternion_xyzw: [0, 0, 0, 1]
+
+wheels:
+  # from first /tf wheel transforms (URDF joint origins)
+  wheel_left_link:
+    translation_in_base_link_m: [0, 0.144, 0.023]
+  wheel_right_link:
+    translation_in_base_link_m: [0, -0.144, 0.023]
+  nominal_wheel_radius_m: 0.033      # ROBOTIS TB3 spec (not calibrated)
+  wheel_separation_m: 0.288       # |y_left - y_right| from TF

@@ -1,0 +1,4 @@
+# Dataset files are bit-verified against the rosbag — never EOL-convert them.
+data/** -text
+# Notebooks are JSON; keep bytes as written.
+*.ipynb -text
