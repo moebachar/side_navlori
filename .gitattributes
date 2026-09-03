@@ -2,3 +2,4 @@
 data/** -text
 # Notebooks are JSON; keep bytes as written.
 *.ipynb -text
+infra/* text eol=lf

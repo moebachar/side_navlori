@@ -1,0 +1,7 @@
+[wsl2]
+# navlori GPU workstation profile (2026-09): the WSL2 VM hosts the whole
+# localization pipeline (torch cu121 on the GTX 1080, ACE training buffer,
+# feature extraction). 12 GB for WSL, 4 GB left for Windows.
+memory=12GB
+processors=4
+swap=8GB
