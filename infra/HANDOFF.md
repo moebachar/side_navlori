@@ -5,6 +5,22 @@ Context for the Claude Code session running ON the fablab machine (Windows 10, u
 remotely from the user's laptop. Goal: everything (code, data, one venv, Jupyter,
 Claude) local on this machine, notebook runs on the GTX 1080 inside WSL2.
 
+## Status update (2026-09-07) — FRESH START, read this first
+
+- This is a reset. A previous on-machine session (Sep 3) stalled on permissions and
+  its VS Code front-end wedged; its working copy at
+  `X:\navlori_staging\side_navlori_repo\` is ABANDONED — ignore it (the user may
+  delete it). Nothing from previous on-machine sessions needs to be preserved.
+- Your workspace is the fresh checkout `X:\navlori\side_navlori` (this file's repo).
+  The canonical runtime copy still gets deployed INSIDE WSL by `deploy_wsl.sh`.
+- Claude Code CLI on this machine was updated to 2.1.260 and verified working
+  headless on 2026-09-04 (`claude -p` round-trip OK; auth valid). If the VS Code
+  extension UI ever hangs on spinner verbs, run `claude` in a plain terminal in the
+  workspace instead — the CLI is proven good.
+- Nothing below has been executed yet: WSL still has no outbound network, and
+  setup/deploy have not run. Start at "THE BLOCKER". The user has pre-approved the
+  interop bridge (option 2) if native NAT can't be fixed quickly.
+
 ## Machine facts (verified)
 
 - WSL2 Ubuntu 22.04 (`Ubuntu-WSL2`, default user **root**), vhdx on `X:\Ubuntu`, ~950 GB free.
