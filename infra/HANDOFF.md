@@ -1,111 +1,125 @@
-# Handoff: migrate side_navlori onto the fablab GPU workstation
+# side_navlori on the fablab GPU workstation
 
-Context for the Claude Code session running ON the fablab machine (Windows 10, user
-`fablab`, non-admin). Written 2026-09-03 by the session that drove the migration
-remotely from the user's laptop. Goal: everything (code, data, one venv, Jupyter,
-Claude) local on this machine, notebook runs on the GTX 1080 inside WSL2.
+How this machine is set up and how a Claude Code session works on it.
+Current as of 2026-09-07. Migration from Colab is complete; the notebook runs on the
+GTX 1080 inside WSL2. For what the project *is*, the user gives that in chat.
 
-## Status update (2026-09-07) — FRESH START, read this first
+## The two rules
 
-- This is a reset. A previous on-machine session (Sep 3) stalled on permissions and
-  its VS Code front-end wedged; its working copy at
-  `X:\navlori_staging\side_navlori_repo\` is ABANDONED — ignore it (the user may
-  delete it). Nothing from previous on-machine sessions needs to be preserved.
-- Your workspace is the fresh checkout `X:\navlori\side_navlori` (this file's repo).
-  The canonical runtime copy still gets deployed INSIDE WSL by `deploy_wsl.sh`.
-- Claude Code CLI on this machine was updated to 2.1.260 and verified working
-  headless on 2026-09-04 (`claude -p` round-trip OK; auth valid). If the VS Code
-  extension UI ever hangs on spinner verbs, run `claude` in a plain terminal in the
-  workspace instead — the CLI is proven good.
-- Nothing below has been executed yet: WSL still has no outbound network, and
-  setup/deploy have not run. Start at "THE BLOCKER". The user has pre-approved the
-  interop bridge (option 2) if native NAT can't be fixed quickly.
+1. **One repo.** The only copy that matters is inside WSL: `/root/navlori/side_navlori`.
+   From Windows it is reachable as `X:\navlori_wsl\side_navlori` (a symlink to
+   `\\wsl$\Ubuntu-WSL2\root\navlori`). Open *that* folder in VS Code; edit *there*.
+   The folders `X:\navlori_staging\...` and `X:\navlori\side_navlori` are stale earlier
+   copies — do not edit them; they can be deleted once this setup has proven itself.
+2. **One driver.** Exactly one Claude session works on this repo at a time: the one in
+   the user's VS Code window (Remote-SSH to this Windows box). Earlier today two agents
+   (one on the user's laptop, one here) both touched the WSL repo and one reset the
+   other's edit. A `claude` binary is also installed inside WSL — unused, ignore it.
 
-## Machine facts (verified)
+## Where things live
 
-- WSL2 Ubuntu 22.04 (`Ubuntu-WSL2`, default user **root**), vhdx on `X:\Ubuntu`, ~950 GB free.
-- GPU: GTX 1080 8 GB (sm_61) — **visible inside WSL** (`nvidia-smi -L` works). Driver 566.36.
-- Host: 16 GB RAM, i7-6700K. `C:\Users\fablab\.wslconfig` already set to 12 GB / 8 GB swap / 4 CPUs (see `wslconfig.txt`).
-- `C:` has only ~18 GB free — put nothing heavy there. `X:` (3 TB) is the big disk.
-- `X:\navlori_staging\` holds: `side_navlori_repo.tar` (repo incl. .git, commit c492ebd),
-  `data.zip` (canonical dataset, 348 MB — same file Colab uses).
+| What | Path (inside WSL) |
+|---|---|
+| repo (canonical) | `/root/navlori/side_navlori` |
+| dataset, unpacked (3465 images) | `/root/navlori/data` |
+| checkpoints (notebook resumes from here) | `/root/navlori/ckpt` |
+| headless-run output notebooks | `/root/navlori/runs/` |
+| logs (jupyter.log, notebook.log) | `/root/navlori/logs/` |
+| the one venv (py3.10, torch 2.3.1+cu121) | `/root/navlori/venv` |
+| Jupyter token | `/root/navlori/jupyter_token` |
+| runner scripts (copies of `infra/*.sh`, CRLF stripped) | `/root/navlori/*.sh` |
+| `/content` | symlink → `/root/navlori`, so every Colab path in the notebook works unchanged |
 
-## THE BLOCKER — WSL has no outbound network
+Machine: Windows 10, user `fablab` (is an Administrator; the VS Code Claude session runs
+elevated). WSL2 Ubuntu 22.04, distro `Ubuntu-WSL2`, default user root, vhdx on `X:`.
+GPU GTX 1080 8 GB (sm_61), driver 566.36, visible in WSL. 16 GB RAM, `.wslconfig` gives
+WSL 12 GB / 8 GB swap / 4 CPUs (`wslconfig.txt`). `C:` is nearly full — keep everything on `X:`.
+The user reaches this box over Tailscale; **never stop the Tailscale service.**
 
-WSL2 NAT forwarding is broken: raw-IP internet (`curl https://1.1.1.1`) times out.
-Tried and did NOT fix it: winnat restart, full reboot, disabling the VirtualBox NDIS6
-binding on both `vEthernet (WSL)` and physical `Ethernet`. What DOES work:
-- WSL → Windows host TCP on port 22 (`/dev/tcp/172.25.208.1/22` connects).
-- WSL interop → Windows exes have full network (`/mnt/c/Windows/System32/curl.exe` → 200).
+## How Claude runs things here
 
-Fix options, in order of preference:
-1. Keep debugging the host NAT (suspects left: Tailscale's WFP filters, other filter
-   drivers — Oculus/Gameroom junk is installed; or HNS state: as admin,
-   `Get-HnsNetwork | ? Name -eq WSL | Remove-HnsNetwork` then `wsl --shutdown`
-   rebuilds the WSL network from scratch). Native NAT is the best end state.
-2. **Interop bridge (no admin, no keys, proven premise)**: run `proxy_hostnet.py`
-   (in this dir) inside WSL — a loopback HTTP proxy on `127.0.0.1:3128` that opens
-   every upstream connection by spawning stock Windows PowerShell running
-   `bridge_win.ps1` (also in this dir) via WSL interop; the Windows side has working
-   network. Copy `bridge_win.ps1` to `X:\navlori_staging\` (the proxy hardcodes that
-   path — adjust if moved), start `python3 proxy_hostnet.py`, then set
-   `http_proxy/https_proxy=http://127.0.0.1:3128` + apt conf + flip sources.list to
-   https (CONNECT-only is cleaner). The user has approved this direction in principle;
-   confirm before making it permanent (autostart in .bashrc).
-3. ssh -W variant of the same (WSL ssh → host sshd 127.0.0.1:22 with a new restricted
-   key in `C:\Users\fablab\.ssh\authorized_keys`) — works too, but option 2 avoids
-   touching authorized_keys.
+The session runs on the Windows side. Anything that needs the GPU, the venv, or Linux
+runs inside WSL. Pattern that works (quoting through `wsl -- bash -c` breaks; Git Bash
+rewrites `/mnt/c/...` arguments):
 
-Note: `/etc/wsl.conf` has `generateResolvConf=false` (set during debugging) and
-`/etc/resolv.conf` is currently MISSING — once network works, either write
-`nameserver 1.1.1.1` or revert wsl.conf. With the bridge, DNS resolves on the
-Windows side (proxy CONNECT by hostname), so resolv.conf barely matters.
+1. Write an **LF-only** script to a scratch file on Windows (Git Bash heredoc/printf).
+2. Run it: `wsl -d Ubuntu-WSL2 -u root -- bash /mnt/c/<path>/script.sh`
+   from PowerShell, or from Git Bash with `MSYS_NO_PATHCONV=1` in front.
+3. Anything that must outlive the command: `nohup setsid bash script.sh > /dev/null 2>&1 &`
+   inside the script. WSL keeps running while such a process exists.
 
-## Then: run these, in order (inside WSL, as root)
+Files can be edited directly at `X:\navlori_wsl\side_navlori\...` (or `\\wsl$\...`);
+Windows git works there (`safe.directory` already added). Creating *directories* over
+the share from Git Bash fails — do that inside WSL.
+Scripts in `infra/` are committed LF (`.gitattributes`), but anything else written from
+Windows may carry CRLF: `tr -d '\r'` before executing it in WSL.
+Permissions: `.claude/settings.local.json` in the repo allows `wsl *` for Bash and PowerShell.
 
-1. `setup_wsl.sh` — apt packages, CUDA toolkit 12.1 (for compiling ACE's dsacstar and
-   DPVO's extensions; exports TORCH_CUDA_ARCH_LIST=6.1), **the one venv** at
-   `/root/navlori/venv`: Python 3.10, `torch==2.3.1+cu121` (pin already validated for
-   DPVO on Colab; wheels ship sm_61 kernels), numpy 1.26.4, jupyterlab. Ends with a
-   GPU smoke test. Idempotent. If the bridge is in use, export the proxy env first.
-2. `deploy_wsl.sh` — unpacks staging into `/root/navlori/side_navlori`, extracts
-   data.zip, creates the **`/content` → `/root/navlori` symlink** (this is the trick:
-   every Colab-hardcoded path in the notebook works verbatim), installs uv (the DPVO
-   notebook cell provisions its own 3.11 sidecar venv with it — expected, leave it),
-   dry-runs the notebook's init cell, installs Claude Code in WSL.
-3. Jupyter: `source /root/navlori/venv/bin/activate && cd /root/navlori/side_navlori
-   && jupyter lab --no-browser --port 8888 --allow-root`. The user reaches it via
-   `ssh -L 8888:localhost:8888 fablab` from their laptop (WSL:8888 is visible on the
-   Windows host's localhost automatically).
-4. Open `side_navlori.ipynb` → Run all. The workstation branch (commit c492ebd) is
-   already in the notebook: init cell detects non-Colab, checkpoint store becomes
-   `/content/ckpt` (= `/root/navlori/ckpt`). Everything checkpoints/resumes; the
-   4-fold Protocol A run re-trains what it needs (user said retraining from scratch
-   is fine — the Drive checkpoints are NOT needed).
+## Jupyter and headless runs
 
-## Notebook expectations on this GPU (vs the Colab T4 baseline)
+- **Jupyter Lab** (already running, survives VS Code disconnects):
+  `bash /root/navlori/start_jupyter.sh` — idempotent; 127.0.0.1:8888, root dir `/root/navlori`,
+  token in `/root/navlori/jupyter_token`, log `logs/jupyter.log`. WSL's 8888 appears on the
+  Windows host's localhost, so from the laptop: `ssh -L 8888:localhost:8888 fablab`
+  → `http://localhost:8888/?token=<token>`. Notebook path in Lab: `side_navlori/side_navlori.ipynb`.
+- **Headless full run** (the "launch, disconnect, come back" mode):
+  `nohup setsid bash /root/navlori/run_notebook.sh &` — papermill executes the repo notebook
+  and saves progress after every cell to `runs/side_navlori.run.ipynb` (open it in Lab to watch);
+  cell output streams to `logs/notebook.log`. The repo notebook itself is not modified.
+- Resumability comes from the notebook, not the runner: every split/trial checkpoints to
+  `/content/ckpt`, so re-running skips finished work. Retraining from scratch is fine
+  (the old Drive checkpoints are not needed).
+- **Not yet exercised:** no full run has been launched on this machine. The first real
+  test is: launch `run_notebook.sh`, disconnect, reconnect, confirm it kept going.
 
-- fp32 throughput ≈ T4, so timings roughly match: ACE ~25 min × 5 splits, MS-T
-  ~45 min × 5, Reloc3r ~30 min × 5, retrieval trio cheap, DPVO 5 trials + 5 LC trials.
-  Full arc from scratch ≈ 9–11 GPU h, resumable at every split.
-- 8 GB VRAM (T4 had 16). Expected tight spots: Reloc3r-512 inference and MS-T
-  training. If OOM: that's a real finding — report it, don't silently change the
-  official recipes.
-- The whole-lap GIF cell and results-table cell run on CPU at the end.
+## What to expect from the notebook on this GPU (vs Colab T4)
 
-## Repo / git
+- fp32 throughput ≈ T4: ACE ~25 min × 5 splits, MS-T ~45 min × 5, Reloc3r ~30 min × 5,
+  retrieval trio cheap, DPVO 5 trials + 5 LC trials. Full arc from scratch ≈ 9–11 GPU h.
+- 8 GB VRAM (T4 had 16). Likely tight: Reloc3r-512 inference, MS-T training. An OOM is a
+  real finding — report it; do not silently change the official recipes.
+- The DPVO cell provisions its own Python 3.11 sidecar venv with `uv` (installed) — expected.
+- The whole-lap GIF and results-table cells run on CPU at the end.
 
-- Canonical: github.com/moebachar/side_navlori (private). HEAD = c492ebd. The tar in
-  staging is that commit. For push/pull from this machine the user must set up auth
-  (gh login or a deploy key) — not done yet.
-- User identity for commits: Mohamed BACHAR <j.elfirqi@gmail.com>.
+## Git / GitHub
+
+- Remote: `github.com/moebachar/side_navlori`, branch `main`. WSL repo is at `origin/main`
+  (`b8d188c`, which already contains the init-cell fix below) plus this file and `.gitignore`.
+- Fetch from WSL works without credentials. **Push is untested from WSL** (no credential
+  helper there); either `gh auth login` inside WSL once, or push with Windows git from
+  `X:\navlori_wsl\side_navlori`, where Git Credential Manager is configured.
+- Identity for commits: Mohamed BACHAR <j.elfirqi@gmail.com> (set in both git configs).
+
+## Done / left
+
+Done (2026-09-07): WSL outbound network OK natively · `setup_wsl.sh` → SETUP_OK (CUDA 12.1,
+torch 2.3.1+cu121, GPU smoke test) · `deploy_wsl.sh` → DEPLOY_OK (code, data, `/content`,
+uv, init-cell dry run) · Jupyter Lab up on 8888 · init cell fixed and committed
+(`find_spec("google.colab")` raised `ModuleNotFoundError` on a bare venv; the check now
+guards on the parent package first).
+
+Left:
+- First headless run + disconnect test (see above).
+- GitHub push auth from this box.
+- Delete the stale copies (`X:\navlori_staging\side_navlori_repo`, `X:\navlori\side_navlori`,
+  `X:\navlori\start_claude_fresh.cmd`) once the user says so.
 
 ## Warnings
 
-- **X: Recycle Bin** contains `navlori-codebase`, `navlori-research`,
-  `navlori-training`, `navlori-infra`, `navlori-writing` — restorable until someone
-  empties the bin. Do not empty it; remind the user to restore.
-- Don't touch `X:\navlori-data`, `X:\navlori-fusion`, `X:\navlori-archive` (the
-  user's disk-X restore) without being asked.
-- Windows-authored shell scripts may carry CRLF — run `sed -i 's/\r$//'` (or
-  `tr -d '\r'`) before executing anything from this dir inside WSL.
+- **X: Recycle Bin** holds `navlori-codebase`, `navlori-research`, `navlori-training`,
+  `navlori-infra`, `navlori-writing` — restorable until emptied. Do not empty it; remind
+  the user to restore.
+- Do not touch `X:\navlori-data`, `X:\navlori-fusion`, `X:\navlori-archive` unless asked.
+- If WSL loses outbound network after a reboot/update: run `infra/fix_wsl_nat.ps1` from an
+  elevated PowerShell (stale HNS "WSL" network; removing it and restarting WSL fixes it).
+  Symptom: WSL→host works, `curl https://1.1.1.1` from WSL times out. Do not debug
+  anything else first, and do not build a proxy/bridge — that path is obsolete.
+
+## History (compressed)
+
+2026-09-03: migration planned from the laptop; on-machine session hit the WSL NAT blocker,
+fixed it (HNS), ran setup. 2026-09-04–07: a second laptop-driven "fresh start" checkout at
+`X:\navlori\side_navlori` was created in parallel. 2026-09-07: this session verified the
+network, ran setup + deploy, found the init-cell bug, started Jupyter; the laptop agent
+committed the same fix as `b8d188c` and fast-forwarded the WSL repo to it. Consolidated
+into the single-repo / single-driver model described at the top.
