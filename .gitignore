@@ -3,8 +3,8 @@
 dataset_full_01/
 dataset_turtlebot/
 
-# Heavy payload of the canonical dataset (3465 JPEGs, ~340 MB) — in data.zip only.
-data/camera/images/
+# Heavy payload of the canonical dataset (JPEGs) — per-run, in the bags only.
+data/*/camera/images/
 
 # Packaging artifact (gets uploaded to Google Drive, not git)
 data.zip

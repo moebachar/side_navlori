@@ -1,0 +1,26 @@
+# NOMINAL camera intrinsics for /camera/image_raw (820x616) — NOT calibrated
+# on this robot. The bag's /camera/camera_info is empty (all zeros): the camera
+# was never calibrated during collection.
+#
+# Provenance: UbiquityRobotics/raspicam_node camera_info/camerav2_410x308.yaml
+# (Raspberry Pi Camera v2, IMX219, full-FoV binned mode). 820x616 is the same
+# optical mode at exactly 2x resolution, so fx, fy, cx, cy scale by 2 and
+# plumb_bob distortion coefficients are unchanged.
+# Treat as a good prior (~1-2% focal accuracy across units), not a calibration.
+image_width: 820
+image_height: 616
+camera_name: raspicam_v2_820x616_nominal
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [644.1408246, 0, 398.5361241, 0, 641.7347972, 310.5066165, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.1639958234, -0.271840031, 0.00105584166, -0.001665559737, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+fov_deg_approx: {horizontal: 65.0, vertical: 51.3}
