@@ -1,0 +1,42 @@
+# Platform description — side_navlori dataset
+platform: TurtleBot3 Waffle Pi
+manufacturer: ROBOTIS
+onboard_computer: Raspberry Pi (ROS 2, rosbag2 recording)
+mcu: OpenCR 1.0 (publishes /imu, /odom, /joint_states, /magnetic_field at a
+  common ~20 Hz tick with identical header stamps)
+sensors:
+  camera:
+    model: Raspberry Pi Camera v2 (Sony IMX219)
+    mode: 820x616 @ ~30 Hz, JPEG compressed
+    mount: front of robot, ~0.103 m above ground, forward-facing (see calib/extrinsics.yaml)
+  lidar:
+    model: LDS-02 (360 deg, ~8.6 Hz mean / median interval 120 ms,
+      variable 247-287 beams/rev)
+    note: recorded for ground-truth generation; angles CCW, frame base_scan
+  imu:
+    model: OpenCR onboard IMU (gyro + accel + orientation filter)
+    rate: ~20 Hz as recorded
+    note: the orientation quaternion has an ARBITRARY heading datum (filter
+      initialization; ~-51 deg from the map/odom frame in this recording,
+      constant throughout). Use it for roll/pitch/relative yaw only.
+  magnetometer:
+    status: DEAD - all samples exactly zero in this recording; do not use
+  wheel_encoders:
+    topics: [/odom, /joint_states]
+    note: /odom yaw incorporates the OpenCR gyro (TB3 firmware fuses it);
+      /odom pose is dead reckoning in the 'odom' frame
+  wifi:
+    tool: custom scanner publishing /wifi/rssi JSON (iw-style scan dumps)
+    rate: one scan per ~4.1 s; scan window ~3.6 s while robot moves
+nominal_specs:
+  wheel_radius_m: 0.033
+  wheel_separation_m: 0.287   # ROBOTIS spec; the TF-derived value in
+                              # extrinsics.yaml is 0.288 (|y_left - y_right|)
+  max_lin_vel_mps: 0.26
+  max_ang_vel_radps: 1.82
+collection:
+  site: indoor lab/office room (~7 x 4.5 m incl. alcoves), CESI campus, France
+  date_utc: 2026-07-24 (epoch-ns timestamps in all files)
+  trajectory: single closed rectangular loop (GT path length ~17.8 m,
+    trajectory bounding box 5.9 x 3.4 m), ~117 s, one lap CW,
+    stationary for the first ~4 s and last ~9 s
