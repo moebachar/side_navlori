@@ -1,5 +1,10 @@
 # side_navlori
 
+> **🤝 Agent / new-contributor onboarding:** start with **[`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md)**
+> (then `docs/ENVIRONMENT.md`, `docs/DATA.md`, `docs/METHODS.md`). Those four files
+> are the current source of truth; the rest of this README predates the
+> per-sensor-notebook structure.
+
 Experimental sandbox for the **navlori** robot-localization project — a free
 space to test new ideas on a real TurtleBot3 Waffle Pi recording, away from the
 main project's assumptions.

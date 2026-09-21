@@ -22,3 +22,10 @@ __pycache__/
 
 .claude/settings.local.json
 figures/
+
+# New raw recordings (2026-09-17) + intermediate SLAM staging — large / regenerable.
+# Promoted runs (data/run3, run4, ...) ARE tracked; these sources are not.
+data/navlori_*/
+data/staging/
+# Phone / external footage (large; lives outside git)
+*.MOV
