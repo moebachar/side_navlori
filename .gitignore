@@ -1,19 +1,19 @@
-# Raw recordings & the superseded first export — too big for git.
-# The canonical dataset ships to Colab as data.zip on Google Drive.
-dataset_full_01/
-dataset_turtlebot/
+# side_navlori is the sandbox. Data lives in the vault X:/navlori-data (git + DVC):
+#   data/             -> link to X:/navlori-data/robot   (golden runs, run1..8, calib, floor plan)
+#   dataset_pipeline/ -> link to X:/navlori-fusion/scripts/dataset (ground-truth pipeline code)
+/data
+/dataset_pipeline
 
-# Heavy payload of the canonical dataset (JPEGs) — per-run, in the bags only.
-data/*/camera/images/
+# Slide material: only the prompts are versioned; images/videos are in the OneDrive snapshot
+slides_progress/**
+!slides_progress/
+!slides_progress/PROMPTS.md
 
-# Packaging artifact (gets uploaded to Google Drive, not git)
-data.zip
-
-# Raw recorded rosbags + local inspection artifacts (too big / not source)
-navlori_*.zip
-navlori_2*/
-_inspect/
-bags/
+# Raw recordings / packaging leftovers (belong in the vault)
+*.db3
+*.bag
+*.zip
+*.MOV
 
 # Python / notebook junk
 __pycache__/
@@ -21,11 +21,3 @@ __pycache__/
 .ipynb_checkpoints/
 
 .claude/settings.local.json
-figures/
-
-# New raw recordings (2026-09-17) + intermediate SLAM staging — large / regenerable.
-# Promoted runs (data/run3, run4, ...) ARE tracked; these sources are not.
-data/navlori_*/
-data/staging/
-# Phone / external footage (large; lives outside git)
-*.MOV
