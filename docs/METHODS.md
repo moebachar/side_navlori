@@ -8,7 +8,14 @@ deep-research pass saved at `compass_artifact_wf-*.md` (repo root).
 
 ## WiFi (`side_navlori_wifi.ipynb`, §3)
 
-### Protocols (mirror the camera notebook)
+### Protocols on the golden runs (current notebook, 2026-09-30)
+- **P0 — pooled random 5-fold** over all 370 scans: literature-style, leaks neighbouring scans of the same run. Reference only.
+- **P1 — leave-one-run-out** (12 folds): a new pass through a mapped building. Also split by "covered" (training scan within 2 m).
+- **P2 — unseen area:** 5 m blocks assigned to 5 folds; training drops scans within 2 m of any test scan.
+- 5 seeds (the seed redraws P0/P2 splits and seeds the deep nets via the runner's 3rd argument); fold AP list = APs heard in training; settings frozen from the pilot. Deep predictions are cached in `/content/runs/wifi_golden/` (delete after changing the harness).
+- By construction RADAR and Horus return training positions, so under P2 they can never be within 2 m (≤2 m % = 0).
+
+### Pilot protocols on run2 (superseded)
 - **A — in-map:** interleaved **4-fold**; every scan predicted by a model that
   never saw it (interpolation inside the surveyed route).
 - **B — forward:** time-forward **60/40** (train first 60 % of the route, test

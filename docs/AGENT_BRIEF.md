@@ -20,7 +20,7 @@ The numbers are for a journal paper: fair, reproducible, honest (median / mean e
   - Protocol A (in-map) medians: ACE 3.9 cm, MST 10.4, NetVLAD 19.5, SALAD 20.1, GeM 21.2, Reloc3r 28.2 cm.
   - Protocol B (unseen space): all methods collapse to 2.4–6.3 m.
   - DPVO visual odometry: ATE 11.4 cm.
-- **`side_navlori_wifi.ipynb`: done on `run2`** (52 scans, 59 APs).
+- **`side_navlori_wifi.ipynb`: re-run on the 12 golden runs (2026-09-30)**, 370 scans, 120 CESI BSSIDs (24 physical radios). Protocols P0 pooled random (leaky reference), P1 leave-one-run-out, P2 unseen 5 m blocks; 5 seeds. Median error P0 / P1 / P2: WkNN 1.49 / 2.28 / 4.39 m, Kim 2.20 / 3.13 / 3.99, RADAR 2.02 / 3.19 / 4.77, Horus 1.93 / 3.27 / 4.63, CNNLoc 5.50 / 7.40 / 7.80. Runners: `tools/wifi_runners/`. Earlier pilot on `run2` (below):
   - Baselines RADAR, WkNN, Horus; CNNLoc and Kim run unchanged in their own Python 3.7 / TF1 sub-venvs.
   - WkNN is best in-map (~1.7 m median). Protocol B gives ~8–10 m for all methods.
   - The deep models overfit on 52 scans; "the big dataset is their real test".
@@ -30,7 +30,7 @@ The numbers are for a journal paper: fair, reproducible, honest (median / mean e
 ## Backlog, in priority order
 
 1. ~~**Update the docs and runners to the new layout.**~~ Done 2026-09-30: notebook setup cells read `/mnt/x/side_navlori/data/<run>` and the loader from `dataset_pipeline/export`; runners point at `tools/`; camera runners take the GPU lock; `ENVIRONMENT.md` / `DATA.md` rewritten.
-2. **Re-run WiFi and camera on the golden runs.**
+2. **Re-run WiFi and camera on the golden runs.** WiFi done (P0/P1/P2 above); camera next, same protocols, under the GPU lock.
    - Define protocols across runs (e.g. train on some runs, test on others: in-map and unseen-area), with seeds and several folds.
    - Keep the methods and their official code unchanged.
 3. **IMU notebook:** classic PDR / strapdown integration and learned inertial odometry (e.g. RoNIN, TLIO-style), evaluated on the golden runs.
