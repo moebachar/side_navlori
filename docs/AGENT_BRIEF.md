@@ -24,6 +24,11 @@ The numbers are for a journal paper: fair, reproducible, honest (median / mean e
   - Baselines RADAR, WkNN, Horus; CNNLoc and Kim run unchanged in their own Python 3.7 / TF1 sub-venvs.
   - WkNN is best in-map (~1.7 m median). Protocol B gives ~8–10 m for all methods.
   - The deep models overfit on 52 scans; "the big dataset is their real test".
+- **DPRO (Deep Patch Radio Odometry), the first personal contribution (2026-09-30):**
+  - Package `dpro/`: a re-implementation of DPVO for WiFi, tracking with no radio map (see `dpro/README.md`). Results in the WiFi notebook §4.
+  - Trained on synthetic sites calibrated to the golden runs; CPU training ~45 min (`tools/notebook_runs/train_dpro.sh`).
+  - Mean per-run median ATE on the 12 golden runs, zero-shot: **1.51 m**. Same solver with the network off: 2.70 m; priors only: 3.57 m. DPRO is better on 9/12 runs.
+  - Fine-tuning on one zone's real clips did not help (1.74 m).
 - **IMU and wheel-odometry notebooks: not started.**
 - **The big dataset now exists:** 12 golden runs (25 min, 262 m, ~370 WiFi scans, 45k camera frames), with ground truth from lidar SLAM + gyroscope placed on 26 surveyed AprilTags (held-out accuracy ~15 cm median). They are in `data\golden_run_1..12` (a link to the vault). `data\run1..run8` are the older recordings, `run2` included.
 
