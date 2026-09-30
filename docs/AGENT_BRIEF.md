@@ -27,7 +27,8 @@ The numbers are for a journal paper: fair, reproducible, honest (median / mean e
 - **DPRO (Deep Patch Radio Odometry), the first personal contribution (2026-09-30):**
   - Package `dpro/`: a re-implementation of DPVO for WiFi, tracking with no radio map (see `dpro/README.md`). Results in the WiFi notebook §4.
   - Trained on synthetic sites calibrated to the golden runs; CPU training ~45 min (`tools/notebook_runs/train_dpro.sh`).
-  - Mean per-run median ATE on the 12 golden runs, zero-shot: **1.51 m**. Same solver with the network off: 2.70 m; priors only: 3.57 m. DPRO is better on 9/12 runs.
+  - Mean per-run median ATE on the 12 golden runs, zero-shot: **1.51 m** (3 trainings, ± 0.02). Same solver with the network off: 2.70 m; priors only: 3.57 m.
+  - **Caveat:** the network-off solver with one constant weight chosen on synthetic sites (w = 0.1) also gets 1.47 m on the real runs. On real data, the network so far learned "trust RSSI less". On synthetic sites it does more (1.55 m vs 2.00 m), but that doesn't transfer yet. Next target: beat the tuned constant weight on real data.
   - Fine-tuning on one zone's real clips did not help (1.74 m).
 - **IMU and wheel-odometry notebooks: not started.**
 - **The big dataset now exists:** 12 golden runs (25 min, 262 m, ~370 WiFi scans, 45k camera frames), with ground truth from lidar SLAM + gyroscope placed on 26 surveyed AprilTags (held-out accuracy ~15 cm median). They are in `data\golden_run_1..12` (a link to the vault). `data\run1..run8` are the older recordings, `run2` included.

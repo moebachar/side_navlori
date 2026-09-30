@@ -33,6 +33,7 @@ class Config:
     MOTION_DAMPING: float = 0.5
     FIXEDP: int = 3
     STRATEGY: str = "random"     # patch selection: random (DPVO) or strongest
+    OFF_WEIGHT: float = 1.0      # mode="off": constant weight of every heard reading (1 = the brief's equal weights)
 
 
 class DPRO:
@@ -132,7 +133,7 @@ class DPRO:
         elif self.mode == "off":
             heard = self.MK[self.jj, aa] > 0
             self.target = torch.where(heard, self.Robs[self.jj, aa], predict(self.X[self.jj], self.TH[aa]))
-            self.weight = heard.double()
+            self.weight = heard.double() * c.OFF_WEIGHT
         else:                                          # "priors": no RSSI at all, only the motion priors act
             self.target = predict(self.X[self.jj], self.TH[aa])
             self.weight = torch.zeros(len(self.jj), dtype=torch.float64)
