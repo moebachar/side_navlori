@@ -3,14 +3,14 @@
 # run2, marshals through the CNNLoc sub-venv runner, reports position error. De-risks before wiring
 # the notebook cell.
 import sys, os, subprocess, tempfile, numpy as np
-sys.path.append("/content/data/scripts")
+sys.path.append("/mnt/x/side_navlori/dataset_pipeline/export")
 from load_dataset import Dataset
 
 CNNLOC_REPO = "/root/navlori/mrepos_wifi/cnnloc"
 CNNLOC_PY   = "/root/navlori/venvs_wifi/cnnloc/bin/python"
 RUNNER      = os.path.join(CNNLOC_REPO, "cnnloc_runner.py")
 
-ds = Dataset("/content/data/run2")
+ds = Dataset("/mnt/x/side_navlori/data/run2")
 M, bssids, t_ns = ds.wifi_matrix()
 gx, gy, _ = ds.gt_at(t_ns); XY = np.c_[gx, gy]; N = len(t_ns)
 print("scans", N, "aps", M.shape[1])

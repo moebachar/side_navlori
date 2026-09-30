@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Durable overnight run of the camera notebook, FRESH from data + notebook.
 # Launch (survives disconnect):
-#   Start-Process -WindowStyle Hidden wsl.exe -ArgumentList '-d','Ubuntu-WSL2','-u','root','--','bash','/root/navlori/scripts_local/run_camera.sh'
+#   Start-Process -WindowStyle Hidden wsl.exe -ArgumentList '-d','Ubuntu-WSL2','-u','root','--','bash','/mnt/x/side_navlori/tools/notebook_runs/run_camera.sh'
 # Waits for a free GPU (never fights other work), then runs the notebook headless with
 # retry + resume (the notebook checkpoints, so a killed attempt continues), plus a stall watchdog.
 ROOT=/root/navlori
@@ -26,18 +26,12 @@ mkdir -p "$TORCH_HOME" "$HF_HOME" "$ROOT/runs"
 source "$ROOT/venv/bin/activate"
 python -c "import torch;print('torch',torch.__version__,'cuda avail',torch.cuda.is_available())"
 
-# --- wait for a free GPU (respect other work already using it) ---
-FREE_MB=1500; NEED=5; MAXWAIT=$((10*3600)); ok=0; waited=0
-echo "waiting for GPU (used < ${FREE_MB} MB x ${NEED} checks; max ${MAXWAIT}s)..."
-echo "waiting for free GPU since $(date)" > "$STATUS"
-while :; do
-  used=$(nvidia-smi --query-gpu=memory.used --format=csv,noheader,nounits | head -1 | tr -d ' ')
-  if [ "${used:-99999}" -lt "$FREE_MB" ]; then ok=$((ok+1)); else ok=0; fi
-  if [ $((waited % 300)) -eq 0 ]; then echo "  [$(date +%T)] GPU used=${used}MB free-streak=${ok}/${NEED}"; fi
-  [ "$ok" -ge "$NEED" ] && { echo "GPU free (used=${used}MB) — starting run $(date)"; break; }
-  [ "$waited" -ge "$MAXWAIT" ] && { echo "TIMEOUT waiting for GPU"; echo "TIMEOUT waiting for GPU $(date)" > "$STATUS"; exit 2; }
-  sleep 30; waited=$((waited+30))
-done
+# --- take the shared GPU lock (waits while another agent holds it; released on any exit) ---
+LOCK="$ROOT/venv/bin/python /mnt/x/navlori-fusion/scripts/gpu_lock.py"
+echo "waiting for the GPU lock since $(date)" > "$STATUS"
+$LOCK acquire --wait --who side_navlori --what "camera notebook (run_camera.sh)" || { echo "GPU lock failed"; exit 2; }
+trap '$LOCK release --who side_navlori' EXIT
+echo "GPU lock taken — starting run $(date)"
 
 # --- papermill with retry + resume + stall watchdog (pattern from prior deploy) ---
 IN=/mnt/x/side_navlori/side_navlori_camera.ipynb     # repo notebook = source of truth

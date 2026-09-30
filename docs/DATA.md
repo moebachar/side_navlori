@@ -1,130 +1,80 @@
-# Data — layout, pipeline, and the new recordings
+# Data: layout, loader, pipeline
 
-## Robot & modalities
+The robot data lives in the **vault `X:\navlori-data`** (git + DVC). `X:\side_navlori\data`
+is a junction to its `robot/` folder (`/mnt/x/side_navlori/data` from WSL).
+**Read-only for this agent:** the dataset agent owns the data and the pipeline
+(`X:\navlori-fusion\docs\agents\dataset.md`). Report data problems to the user.
 
-**TurtleBot3 Waffle Pi**, ROS2 Humble, recorded as rosbag2 (sqlite3 `.db3`).
-Topics: `/camera/image_raw/compressed` (imx219), `/imu` `/odom` `/joint_states`
-`/magnetic_field` (OpenCR, one shared timer), `/scan` (LDS-02 lidar, ~9.6 Hz),
-`/wifi/rssi` (custom `wifi_scanner`, JSON, ~1 scan / 4 s), `/tf` `/tf_static`
-`/battery_state` `/cmd_vel`.
+## Robot and sensors
 
-## Run folder layout (run1, run2 — the target shape)
+**TurtleBot3 Waffle Pi**, ROS 2 Humble, recorded as rosbag2. Topics:
+`/camera/image_raw/compressed` (imx219), `/imu` `/odom` `/joint_states` `/magnetic_field`
+(OpenCR, one shared timer), `/scan` (LDS-02 lidar, ~9.5 Hz), `/wifi/rssi` (custom
+`wifi_scanner`, ~1 scan / 4 s), `/tf` `/tf_static` `/battery_state`. `/cmd_vel` was never
+recorded. The magnetometer is dead (all zeros).
+
+## What is in `data\`
+
+| folder | what |
+|---|---|
+| `golden_run_1..12` | **the main dataset** (2026-09-24): 12 runs, 25 min, 262 m, ~370 WiFi scans, 45k frames. Ground truth in the **building frame**. |
+| `run1`, `run2` | older laps (2026-07-24, 2026-09-16), used by the current notebooks. GT in each run's own **SLAM start frame**: not comparable with the golden runs. |
+| `run3..run8` | 2026-09-17 recordings, SLAM-frame GT (superseded by the golden runs). |
+| `golden_floorplan/` | floor plan, `plan_transform.json`, all paths on the plan, **`golden_runs_summary.csv`** (per-run duration, length, tags, GT accuracy, scan counts). |
+| `tags_ground_truth.json` | surveyed positions of the 26 AprilTags (building frame). |
+| `calib/` | Kalibr camera calibration at 640×480 (`kalibr_640x480/`), calibration targets. |
+
+Each `*.dvc` file next to a folder is its DVC pointer. Don't touch them.
+
+## Run folder layout (all runs share it)
 
 ```
-data/runN/
-  camera/    images/<t_ns>.jpg , camera.csv (t_ns,t_bag_ns,filename)
-  imu/       imu.csv
-  wheel_odom/ odom.csv , joint_states.csv
-  mag/       mag.csv           (magnetometer is DEAD/all-zero, kept for completeness)
-  wifi/      wifi.csv (long: t_start_ns,t_end_ns,scan_idx,bssid,ssid,rssi_dbm,...) , wifi_raw.jsonl
-  lidar/     scans.npz (ragged CSR: offsets/ranges/angles/t_ns/...) , scans_meta.csv
-  ground_truth/ gt_pose.csv (t_ns,x,y,yaw,n_matched,inlier_frac,rmse_m,quality) ,
-                map_points.npz (xy,normals) , gt_overview.png , map.png/.yaml , method.md
-  calib/     camera_intrinsics_nominal.yaml , extrinsics.yaml , robot.yaml
-  README.md  (dataset card)
+<run>/
+  camera/       images/<t_ns>.jpg, camera.csv (t_ns, t_bag_ns, filename)          ~29 Hz, 640x480 (golden)
+  imu/          imu.csv (t_ns, t_bag_ns, wx..wz, ax..az, qx..qw)                   ~145 Hz (golden)
+  wheel_odom/   odom.csv (x, y, yaw, v_lin, w_ang), joint_states.csv              ~145 Hz (golden)
+  mag/          mag.csv                                                            dead
+  wifi/         wifi.csv (long: t_start_ns, t_end_ns, scan_idx, bssid, ssid, rssi_dbm, freq_mhz, last_seen_ms), wifi_raw.jsonl
+  lidar/        scans.npz (ragged CSR: offsets/ranges/angles/t_ns), scans_meta.csv
+  ground_truth/ gt_pose.csv (t_ns, x, y, yaw, quality, ...), gt_info.json, method.md, maps and plots
+  calib/        camera_intrinsics.yaml (Kalibr, golden), extrinsics.yaml, robot.yaml, apriltags.yaml
+  README.md     dataset card
 ```
+Timestamps everywhere: raw async int64 nanoseconds, no resampling.
 
-Timestamp policy everywhere: **raw async int64 nanoseconds**, no resampling.
+**Known quirk:** in `joint_states.csv` the columns `left_vel_radps` / `right_vel_radps`
+hold **m/s** (wheel surface speed), not rad/s. A rename is pending the user's approval.
 
-## Loading the data (`data/scripts/load_dataset.py`)
+## Ground truth of the golden runs
+
+Gyro heading + lidar-SLAM distances (PLICP), placed **rigidly per run** in the building
+frame by a joint least-squares adjustment over all AprilTag sightings of all runs.
+Not drift-corrected by the tags. Accuracy per run is in `golden_runs_summary.csv`:
+held-out tag error ~2–24 cm median (run 9: 43 cm); runs 2 and 8 are map-matched to the
+floor plan instead; run 1 has no held-out check. Details: `<run>/ground_truth/method.md`.
+**Consequence:** errors below ~15 cm are inside the GT accuracy; say so when reporting.
+
+## Loading a run
 
 ```python
+import sys
+sys.path.append("/mnt/x/side_navlori/dataset_pipeline/export")
 from load_dataset import Dataset
-ds = Dataset("/content/data/run2")
+ds = Dataset("/mnt/x/side_navlori/data/golden_run_7")
 ds.camera / ds.imu / ds.odom / ds.joints / ds.wifi / ds.gt / ds.lidar   # DataFrames / arrays
-M, bssids, t_ns = ds.wifi_matrix(max_age_ms=4000, fill_dbm=-100)  # (n_scan, n_ap) RSSI matrix
-gx, gy, yaw   = ds.gt_at(t_ns)                                    # GT pose interpolated at any stamps
+M, bssids, t_ns = ds.wifi_matrix(max_age_ms=4000, fill_dbm=-100)       # (n_scan, n_ap) RSSI matrix
+gx, gy, yaw = ds.gt_at(t_ns)                                            # GT pose at any stamps
 ```
+`wifi_matrix()` is per run: its AP columns differ between runs. For cross-run work, build
+one shared BSSID vocabulary and align every run's matrix to it.
 
-## The pipeline (`data/scripts/`)
+## The pipeline (read-only reference)
 
-| script | reads | writes | path constants (hardcoded at top) |
-|---|---|---|---|
-| `export_camera.py` | bag | `<run>/camera/` | `BAGDIR`, `OUTROOT` (=`<run>`) |
-| `export_telemetry.py` | bag | `<run>/imu,mag,wheel_odom/` | `BAGDIR`, `OUTROOT` (=`<run>`) |
-| `export_lidar.py` | bag | `<run>/lidar/` | `BAGDIR`, `OUTDIR` (=`<run>/lidar`) |
-| `export_wifi.py` | bag | `<run>/wifi/` | `BAGDIR`, `OUTDIR` (=`<run>/wifi`) |
-| `export_calib.py` | bag | `<run>/calib/` | `BAG`, `OUT` (extrinsics from `/tf_static` + nominal intrinsics) |
-| `build_ground_truth.py` | `<run>/lidar/scans.npz` + `<run>/wheel_odom/odom.csv` | `<run>/ground_truth/` | `ROOT` (=`<run>`) |
+`dataset_pipeline/` = `X:\navlori-fusion\scripts\dataset`:
+- `export/`: bag → run folder (`export_{camera,telemetry,lidar,wifi,calib}.py`,
+  `build_ground_truth.py` = PLICP SLAM) and `load_dataset.py`.
+- `golden/`: the golden-run ground truth (tag detection `tags_detect.py`, tag network
+  `tag_ba2.py`, packaging `golden_package.py`, floor-plan registration), plus
+  `alternatives/` and `diagnostics/`.
 
-`build_ground_truth.py` is **PLICP scan-to-map SLAM** (deskew → point-to-line
-ICP → voxel map + refinement); on run2 it hit ~7.8 mm median. It uses
-`matplotlib.use("Agg")` internally.
-
-### Driving the exporters per bag
-
-They hardcode their input/output paths, so per bag you either edit the two
-constant lines, or **patch them in memory and exec** (what the previous agent
-did — lets you batch without touching the files):
-
-```python
-import re
-def run_script(path, repls):          # repls: list of (regex, replacement) on the constant lines
-    src = open(path).read()
-    for pat, rep in repls:
-        src, n = re.subn(pat, rep, src, count=1); assert n == 1, pat
-    g = {"__name__": "__main__", "__file__": path}
-    exec(compile(src, path, "exec"), g)
-
-BAG = "/mnt/x/side_navlori/data/navlori_big"; RUN = "/mnt/x/side_navlori/data/run3"
-run_script(".../export_camera.py",
-           [(r'BAGDIR = Path\(r".*?"\)', f'BAGDIR = Path(r"{BAG}")'),
-            (r'OUTROOT = Path\(r".*?"\)', f'OUTROOT = Path(r"{RUN}")')])
-# lidar/wifi use OUTDIR = f"{RUN}/lidar" | f"{RUN}/wifi"; GT uses ROOT = r"{RUN}" (no Path()).
-```
-Run camera export to a **native path** (e.g. `/root/navlori/_tmp/...`) when
-speed matters — writing thousands of JPEGs onto the `/mnt/x` mount is slow.
-
-## The NEW recordings (2026-09-17) — status & the finalize task
-
-Six runs recorded on the physical robot at **camera 640×480 @ 30 fps RGB888**,
-IMU/odom ~144 Hz, scan ~9.6 Hz, wifi ~1/4 s. `/cmd_vel` is **absent** in all
-bags (the controller published on another topic — harmless; motion is fully in
-`/odom`+`/imu`+`/scan`).
-
-| staging name | raw bag | duration | camera | wifi scans | SLAM med / p95 |
-|---|---|---|---|---|---|
-| `big`        | `data/navlori_big`        | 4.0 min | 7254 | 58 | 7.7 / 14.9 mm |
-| `0917_152255`| `data/navlori_0917_152255`| 1.8 min | 3118 | 25 | 8.1 / 12.0 mm |
-| `0917_152704`| `data/navlori_0917_152704`| 1.9 min | 3478 | 28 | 8.9 / 12.9 mm |
-| `0917_151700`| `data/navlori_0917_151700`| 4.3 min | 7705 | 62 | 10.8 / 19.4 mm |
-| `0917_151405`| `data/navlori_0917_151405`| 2.2 min | 3878 | 32 | 11.3 / 17.8 mm |
-| `0917_150450`| `data/navlori_0917_150450`| 6.5 min | 11620 | 94 | 12.3 / 38.9 mm |
-
-**`data/staging/<name>/`** already has **lidar + telemetry (imu/mag/wheel_odom)
-+ ground_truth** built. It does **NOT** yet have **camera/** or **wifi/**.
-Compare all six trajectories in **`data/staging/_compare_gt.png`**.
-
-### Finalize procedure
-
-1. **User picks keepers** (all SLAM'd fine; `0917_150450` has the most SLAM
-   stress, `0917_152255` the least coverage — but it's a coverage/route call).
-   Don't delete a run without the user.
-2. For each keeper, **add the two missing modalities** into its staging folder:
-   `export_camera.py` and `export_wifi.py` with `BAGDIR=data/navlori_<name>`,
-   `OUTROOT`/`OUTDIR` pointing at `data/staging/<name>`. Also run
-   `export_calib.py` for `extrinsics.yaml`.
-3. **Promote:** rename `data/staging/<name>` → `data/run3` (then run4, …), write
-   `data/runN/README.md` (dataset card: date, route, sensor rates, differences
-   vs run1/run2 — note **640×480** camera and absent `/cmd_vel`), and **copy the
-   folder into `/root/navlori/data/`** so the notebooks can load it (see
-   ENVIRONMENT.md — two data copies).
-4. **Delete the raw `data/navlori_*` bags** once export is verified (large,
-   gitignored).
-
-## Camera calibration (pending)
-
-The new runs use camera **640×480** — but no on-robot calibration exists; runs
-so far ship **nominal** intrinsics only (`camera_intrinsics_nominal.yaml`,
-provenance = Pi-Cam-v2 reference, ~1–2 % focal accuracy — and the existing one
-is for the **820×616** mode, not 640×480). To upgrade:
-
-- A print-ready checkerboard is at **`calib/checkerboard_9x6_25mm_A4.pdf`**
-  (9×6 inner corners, 25 mm squares — measure after printing at 100 %).
-- Calibration is a **short dedicated session on the robot** (film the board with
-  the camera at 640×480), then `cv2.calibrateCamera` → write a ROS camera_info
-  YAML into each run's `calib/`. Intrinsics are fixed per camera+resolution, so
-  it can be done any time as long as the camera stays 640×480. Until then, use a
-  640×480-scaled nominal YAML.
-- Extrinsics (sensor↔base TF) and the robot card come from `export_calib.py`
-  (reads the bag's `/tf_static`), independent of intrinsics.
+Raw rosbags are in the vault's `raw/` folder.

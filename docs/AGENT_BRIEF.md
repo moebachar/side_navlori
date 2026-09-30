@@ -8,7 +8,8 @@ The original goal of side_navlori: for each sensor of the real TurtleBot3, one c
 1. shows the sensor;
 2. cleans and transforms it;
 3. evaluates 2–3 classic baselines plus 1–2 recent state-of-the-art methods, using their **official code unchanged**, on the local GPU;
-4. later, adds a personal contribution.
+4. later, brainstrom innovate and adds a personal contribution.
+5. make Mohamed learn and have insights along the path by not scilently passing things, but by including him in decision and inlightning him.
 
 The numbers are for a journal paper: fair, reproducible, honest (median / mean error in metres, clear protocols).
 
@@ -28,12 +29,7 @@ The numbers are for a journal paper: fair, reproducible, honest (median / mean e
 
 ## Backlog, in priority order
 
-1. **Update the docs and runners to the new layout** (short, do it first).
-   - `data\` is now a link to `X:\navlori-data\robot`.
-   - The exporters and loader moved to `dataset_pipeline\export\` (`load_dataset.py`).
-   - The WSL runner scripts moved to `tools\notebook_runs\`. They still point at `/root/navlori/scripts_local` and `/root/navlori/data`, which no longer exist.
-   - In WSL, read data from `/mnt/x/side_navlori/data/...`. If I/O is too slow, copy the runs you need to a native WSL folder, and delete the copy when done.
-   - Rewrite `ENVIRONMENT.md` / `DATA.md` accordingly.
+1. ~~**Update the docs and runners to the new layout.**~~ Done 2026-09-30: notebook setup cells read `/mnt/x/side_navlori/data/<run>` and the loader from `dataset_pipeline/export`; runners point at `tools/`; camera runners take the GPU lock; `ENVIRONMENT.md` / `DATA.md` rewritten.
 2. **Re-run WiFi and camera on the golden runs.**
    - Define protocols across runs (e.g. train on some runs, test on others: in-map and unseen-area), with seeds and several folds.
    - Keep the methods and their official code unchanged.

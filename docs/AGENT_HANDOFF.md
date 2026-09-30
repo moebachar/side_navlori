@@ -1,5 +1,10 @@
 # navlori — Agent Handoff
 
+> **Historical (2026-09-17).** Sections 3, 4 and 6 are done or obsolete: the new runs were
+> finalised, then superseded by the 12 golden runs, and the data moved to the
+> `X:\navlori-data` vault. Current state, backlog and rules: **`AGENT_BRIEF.md`**. Paths:
+> `ENVIRONMENT.md`, `DATA.md`. Sections 1, 2 and 5 still describe the project well.
+
 You are taking over the **side_navlori** project for a few days. This folder
 (`docs/`) is your onboarding. Read all four files before touching anything:
 

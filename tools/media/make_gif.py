@@ -5,10 +5,10 @@ import sys, os, subprocess, tempfile, numpy as np
 import matplotlib; matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, PillowWriter
-sys.path.append("/content/data/scripts")
+sys.path.append("/mnt/x/side_navlori/dataset_pipeline/export")
 from load_dataset import Dataset
 
-DATA = "/content/data/run2"
+DATA = "/mnt/x/side_navlori/data/run2"
 ds = Dataset(DATA)
 M, bssids, t_ns = ds.wifi_matrix()
 gx, gy, _ = ds.gt_at(t_ns); XY = np.c_[gx, gy]; N = len(t_ns)

@@ -7,6 +7,9 @@ export TORCH_HOME=/root/navlori/torch_cache; export HF_HOME=/root/navlori/hf_cac
 export TORCH_CUDA_ARCH_LIST=6.1; export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 # deliberately NOT setting MPLBACKEND=Agg -> ipykernel inline backend embeds PNG figures.
 cd /root/navlori
+LOCK="/root/navlori/venv/bin/python /mnt/x/navlori-fusion/scripts/gpu_lock.py"
+$LOCK acquire --wait --who side_navlori --what "camera notebook figures (rerun_figs.sh)" || exit 2
+trap '$LOCK release --who side_navlori' EXIT
 jupyter nbconvert --to notebook --execute --ExecutePreprocessor.kernel_name=python3 \
   --ExecutePreprocessor.timeout=1800 \
   --output /root/navlori/runs/side_navlori_camera.figs.ipynb \

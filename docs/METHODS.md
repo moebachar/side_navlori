@@ -27,7 +27,7 @@ runs any `predict(Mtr, Ptr, Mte)` under both protocols.
 - **CNNLoc** (Song et al., IEEE Access 2019 — SAE + 1D-CNN) and **Kim** (Kim et
   al., Big Data Analytics 2018 — SAE + regression head): official/faithful code,
   each in its **own Py3.7/TF1.15 sub-venv**, driven from the notebook by
-  subprocess with `.npz` marshalling. Runners:
+  subprocess with `.npz` marshalling. Runners (WSL-local, not in git):
   `/root/navlori/mrepos_wifi/cnnloc/cnnloc_runner.py`,
   `/root/navlori/mrepos_wifi/kimdnn/kim_runner.py`. Inputs are padded to the
   **520-column UJIIndoorLoc layout** with `y = [X, Y, 0, 0]`; building/floor
@@ -43,8 +43,9 @@ This is why the **bigger dataset matters** — it's the real test of the deep
 methods.
 
 ### Re-running on the new dataset
-1. Point the setup cell `DATA` at the new run (e.g. `/content/data/run3`), making
-   sure that folder exists under `/root/navlori/data/` (ENVIRONMENT.md).
+1. Point the setup cell `DATA` at the new run (e.g. `/mnt/x/side_navlori/data/run3`).
+   Protocols A/B are single-run; the golden runs need cross-run protocols (next step
+   in `AGENT_BRIEF.md`).
 2. Execute headless (ENVIRONMENT.md nbconvert command). §3 baselines + both
    sub-venv deep methods re-run automatically (a few minutes).
 3. There is **no fixed random seed** → ~0.5 m run-to-run wobble on small N (pure
@@ -61,8 +62,9 @@ visual odometry), each run on the GPU; the exact list + cells are in the
 notebook. **DPVO** runs in its **own legacy sub-venv** (built with `uv venv
 --python 3.x`, the pattern predating the micromamba WiFi venvs) with
 `TORCH_CUDA_ARCH_LIST="6.1;7.5"` for the sm_61 GPU. Setup cell uses
-`DATA = "/content/data/run1"`; re-run on a new run by repointing `DATA` and
-re-executing headless (inline backend so the figures embed).
+`DATA = "/mnt/x/side_navlori/data/run1"`; re-run on a new run by repointing `DATA` and
+re-executing headless with `tools/notebook_runs/run_camera.sh` (takes the GPU lock).
+GPU memory: one fresh process per fold for ACE and DPVO, `TORCH_CUDA_ARCH_LIST=6.1`.
 
 ## Reproducibility notes
 - Notebooks are committed **with outputs + figures embedded** — always re-execute
