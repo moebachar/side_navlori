@@ -30,6 +30,9 @@ The numbers are for a journal paper: fair, reproducible, honest (median / mean e
   - Mean per-run median ATE on the 12 golden runs, zero-shot: **1.51 m** (3 trainings, ± 0.02). Same solver with the network off: 2.70 m; priors only: 3.57 m.
   - **Caveat:** the network-off solver with one constant weight chosen on synthetic sites (w = 0.1) also gets 1.47 m on the real runs. On real data, the network so far learned "trust RSSI less". On synthetic sites it does more (1.55 m vs 2.00 m), but that doesn't transfer yet. Next target: beat the tuned constant weight on real data.
   - Fine-tuning on one zone's real clips did not help (1.74 m).
+- **Radio Flow SLAM (DPRO v2), 2026-10-01:** package `dpro/rf/` (see `dpro/rf/README.md`), all 4 phases run on the golden runs. Report: https://claude.ai/artifact/1KxQD1ZS2tK7Xi5EwXDhT5 (also a Claude doc).
+  - WiFi alone ties the best earlier method (1.47 m); the learned update gives 1.46 m (3 trainings); the true AP map would give 1.20 m. No phase gate passed.
+  - **Data finding:** in golden runs 4 and 9 the IMU gyro has a constant bias (-21.9 / +4.6 deg/s), so the vault's `/odom` heading curls (2.55 / 2.23 m). The wheel encoders (`joint_states`) are fine: encoder-only dead reckoning gives 0.13 m on all 12 runs. A WiFi estimate of the bias fixes run 4 (0.34 m) but is beaten by the encoders. Any odometry baseline must use the encoders, or check them against the gyro.
 - **IMU and wheel-odometry notebooks: not started.**
 - **The big dataset now exists:** 12 golden runs (25 min, 262 m, ~370 WiFi scans, 45k camera frames), with ground truth from lidar SLAM + gyroscope placed on 26 surveyed AprilTags (held-out accuracy ~15 cm median). They are in `data\golden_run_1..12` (a link to the vault). `data\run1..run8` are the older recordings, `run2` included.
 
@@ -42,6 +45,7 @@ The numbers are for a journal paper: fair, reproducible, honest (median / mean e
 3. **IMU notebook:** classic PDR / strapdown integration and learned inertial odometry (e.g. RoNIN, TLIO-style), evaluated on the golden runs.
 4. **Wheel-odometry notebook:** differential-drive dead reckoning, with and without gyroscope heading, plus a learned correction baseline.
    - The wheel velocity columns named `*_vel_radps` actually hold **m/s**.
+   - The `/odom` heading is the gyro's and is biased in golden runs 4 and 9; integrate `left/right_pos_rad` (R 0.033 m, separation 0.287 m) as the encoder baseline (`dpro/rf/encoder_odometry.py`, 0.13 m).
    - The ground truth uses the gyroscope for heading, so odometry drift below ~15 cm is inside the ground-truth accuracy. Say so in the notebook.
 
 ## Rules

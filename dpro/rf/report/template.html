@@ -1,0 +1,319 @@
+<title>Radio Flow SLAM Results</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* One reading column (48rem) with wide figures. Sections follow the plan's phases, so they are numbered. */
+:root {
+  --bg: #f6f7f9; --surface: #ffffff; --ink: #11161c; --ink-2: #47525e; --muted: #76828f; --line: #dde2e8; --grid: #e8ebef;
+  --c1: #2a78d6; --c2: #eb6834; --c3: #1baf7a; --c4: #eda100; --c1-soft: #9ec5f4; --ceil: #898781;
+  --good: #0ca30c; --bad: #d03b3b; --warn: #b07700;
+  --wash: #e9f1fb; --seq-lo: #e4eefb; --seq-hi: #0d366b; --is-dark: 0;
+  --display: "Archivo", "Segoe UI", system-ui, sans-serif;
+  --body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1216; --surface: #171b21; --ink: #eef2f6; --ink-2: #b9c3cd; --muted: #8794a2; --line: #2a3139; --grid: #222830;
+    --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c1-soft: #184f95; --ceil: #8a8f96;
+    --good: #2fbf2f; --bad: #e66767; --warn: #e0a526;
+    --wash: #16253a; --seq-lo: #1b2633; --seq-hi: #9ec5f4; --is-dark: 1; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1216; --surface: #171b21; --ink: #eef2f6; --ink-2: #b9c3cd; --muted: #8794a2; --line: #2a3139; --grid: #222830;
+  --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c1-soft: #184f95; --ceil: #8a8f96;
+  --good: #2fbf2f; --bad: #e66767; --warn: #e0a526;
+  --wash: #16253a; --seq-lo: #1b2633; --seq-hi: #9ec5f4; --is-dark: 1; color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; margin: 0; }
+.page { max-width: 48rem; margin: 0 auto; padding-inline: 16px; padding-block: 40px 80px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 56px; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.1rem, 6vw, 2.9rem); font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.55rem; font-weight: 600; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+section { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; min-width: 0; }
+.label { font-family: var(--display); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.sec-head { display: grid; gap: 8px; }
+.lede { color: var(--ink-2); font-size: 1.05rem; }
+.num, code, .mono { font-family: var(--mono); font-size: 0.9em; }
+.num { white-space: nowrap; }
+a { color: var(--c1); }
+.muted { color: var(--ink-2); }
+header { display: grid; gap: 12px; }
+header .meta { font-family: var(--mono); font-size: 0.8rem; color: var(--muted); }
+.short { background: var(--wash); border-radius: 12px; padding: 22px 24px; display: grid; gap: 12px; }
+ul.tight, ol.tight { margin: 0; padding-left: 1.3em; display: grid; gap: 8px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; min-width: 0; }
+.scroll { overflow-x: auto; }
+.wide { width: min(100vw - 32px, 62rem); justify-self: center; }
+@media (max-width: 1000px) { .wide { width: 100%; } }
+svg { display: block; width: 100%; height: auto; }
+svg text { font-family: var(--body); }
+svg.mid { max-width: 660px; justify-self: center; }
+svg.small { max-width: 400px; justify-self: center; }
+.minw { min-width: 820px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--display); font-weight: 600; font-size: 0.76rem; letter-spacing: 0.03em; color: var(--ink-2); }
+td.n { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+tr.grp td { font-family: var(--display); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding-top: 16px; }
+#perrun td.hc { text-align: right; border-bottom: 2px solid var(--surface); border-right: 2px solid var(--surface); }
+#perrun th { font-size: 0.72rem; vertical-align: bottom; min-width: 5.5rem; }
+.caption { font-size: 0.86rem; color: var(--ink-2); }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 18px; align-items: start; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.82rem; color: var(--ink-2); align-items: center; }
+.sw { display: inline-block; width: 14px; height: 6px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+.tip { position: fixed; z-index: 10; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 0.78rem; padding: 6px 9px; border-radius: 6px; max-width: 19rem; line-height: 1.35; display: none; }
+.stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr)); gap: 14px; }
+.stat { display: grid; gap: 2px; }
+.stat b { font-family: var(--mono); font-weight: 500; font-size: 1.45rem; }
+.stat span { font-size: 0.84rem; color: var(--ink-2); }
+.verdicts { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 12px; }
+.vcard { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 8px; align-content: start; }
+.vcard h3 { font-size: 0.98rem; }
+.vcard p { font-size: 0.88rem; color: var(--ink-2); }
+.vcard .res { color: var(--ink); }
+.chip { justify-self: start; font: 600 0.72rem var(--display); letter-spacing: 0.08em; text-transform: uppercase; border-radius: 999px; padding: 3px 10px; border: 1.5px solid currentColor; }
+.chip.fail { color: var(--bad); } .chip.pass { color: var(--good); } .chip.part { color: var(--warn); }
+.finding { display: grid; gap: 10px; }
+.finding ol { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; }
+.maps { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 14px; }
+figure.map { margin: 0; display: grid; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 10px; }
+figure.map svg { max-width: 300px; justify-self: center; }
+figure.map figcaption { font-size: 0.8rem; color: var(--ink-2); line-height: 1.5; }
+.note { border-left: 3px solid var(--warn); padding: 4px 0 4px 14px; display: grid; gap: 6px; }
+.callout { border-left: 3px solid var(--c3); padding: 4px 0 4px 14px; display: grid; gap: 6px; }
+details summary { cursor: pointer; font-size: 0.88rem; color: var(--ink-2); }
+pre { margin: 0; font-family: var(--mono); font-size: 0.8rem; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; overflow-x: auto; line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="page">
+
+<header>
+  <span class="label">side_navlori · results report</span>
+  <h1>Radio Flow SLAM: results</h1>
+  <p class="lede">All four phases of the plan were run on the 12 golden runs. In short, WiFi alone did not beat the best earlier method, and the network adds only a little. With wheel odometry, WiFi can find and remove a gyro fault that breaks the odometry, but the robot's own wheel encoders fix that fault better.</p>
+  <span class="meta">2026-10-01 · 12 golden runs, 370 scans, 24 APs · weights chosen on synthetic sites only · code in side_navlori/dpro/rf</span>
+</header>
+
+<section class="short">
+  <span class="label">In short</span>
+  <ul class="tight">
+    <li><b>WiFi alone: a tie.</b> The new solver reaches <span class="num">1.47 m</span>, the same as the best earlier method (DPRO v1 with the network off, tuned). Even with the true AP map it only reaches <span class="num">1.20 m</span>. On these runs, WiFi alone looks close to its limit.</li>
+    <li><b>Recognising a place seen before: better ranking, still mostly wrong.</b> The learned check ranks pairs of scans better than the raw comparison (score <span class="num">0.87</span> vs <span class="num">0.78</span>), but only <span class="num">30–32 %</span> of its proposals are really within 3 m. The best possible at that number of proposals is <span class="num">61 %</span>.</li>
+    <li><b>The learned update: real on synthetic sites, small on real runs.</b> On new synthetic sites it beats the hand-set weights on 21–25 of 30 sites. On the real runs it gives <span class="num">1.46 m</span> (all 3 trainings within ±0.01 m) and <span class="num">10 %</span> less drift. The bar I set was 0.2 m better, so it fails.</li>
+    <li><b>With odometry, WiFi works as a check, not as a sensor.</b> Mixing WiFi into the odometry changes nothing (<span class="num">0.48 m</span> both). But in runs 4 and 9 the gyro has a constant bias and the odometry path curls into loops. WiFi alone finds that bias (run 4: <span class="num">−22.4</span> °/s found, <span class="num">−21.9</span> true) and fixes run 4 (<span class="num">2.55 → 0.34 m</span>) without touching the healthy runs. Average: <span class="num">0.48 → 0.30 m</span>, after the run only. <b>But the fault is in the gyro, not the wheels:</b> odometry from the wheel encoders alone reaches <span class="num">0.13 m</span> without WiFi.</li>
+    <li><b>Next step I suggest:</b> fix the odometry baseline first (encoders checked against the gyro), aim WiFi at faults the robot cannot see itself, and record longer runs with loops before any more learning.</li>
+  </ul>
+</section>
+
+<section id="verdicts">
+  <div class="sec-head"><span class="label">Verdict per phase</span><h2>Four gates set in advance, none passed; the one positive finding is beaten by the wheel encoders</h2></div>
+  <div class="verdicts">
+    <div class="vcard"><span class="chip fail">Tie · not passed</span><h3>1 · The graph without a network</h3><p>Gate: beat 1.47 m aligned, or clearly beat it online.</p><p class="res"><b class="num">1.47 m</b> aligned (same). Online is not a usable test for WiFi alone (see §1).</p></div>
+    <div class="vcard"><span class="chip fail">Not passed</span><h3>2 · Learned revisit check</h3><p>Gate: proposals within 3 m from 25 % to at least 60 %.</p><p class="res"><b class="num">30–32 %</b>. The gate was badly set: the best possible was 61 %.</p></div>
+    <div class="vcard"><span class="chip fail">Not passed</span><h3>3 · Full learned update</h3><p>Gate: beat phase 1 by more than 0.2 m on all 3 trainings.</p><p class="res"><b class="num">−0.02 m</b> (1.47 → 1.46 m), consistent over 3 trainings; drift −10 %.</p></div>
+    <div class="vcard"><span class="chip fail">Not passed</span><h3>4 · With wheel odometry</h3><p>Gate: less drift than odometry alone on the long runs.</p><p class="res"><b class="num">0.56</b> vs <b class="num">0.57 m</b> per 5 m: no difference.</p></div>
+    <div class="vcard"><span class="chip part">Works · not the best fix</span><h3>4b · WiFi gyro-bias check</h3><p>Not in the plan. Found while explaining phase 4.</p><p class="res">Odometry <b class="num">0.48 → 0.30 m</b>; run 4 fixed, no healthy run touched. Wheel encoders alone: <b class="num">0.13 m</b>.</p></div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="sec-head"><span class="label">How it was tested</span><h2>Same runs, same metrics, weights chosen away from the test data</h2></div>
+  <div class="stat-row">
+    <div class="stat"><b>12</b><span>golden runs in 2 zones (6 west, 6 east)</span></div>
+    <div class="stat"><b>370</b><span>WiFi scans, one every ~4 s (~0.8 m)</span></div>
+    <div class="stat"><b>24</b><span>APs (an AP = one access point on one band)</span></div>
+    <div class="stat"><b>5–70 m</b><span>path per run (11–90 scans)</span></div>
+  </div>
+  <div class="panel">
+    <h3>Four ways to score a path (all in metres, median over the run, then averaged over the 12 runs)</h3>
+    <ul class="tight">
+      <li><b>Aligned</b>: the whole estimated path is rotated and shifted to fit the truth as well as possible, then compared. This is what papers report (DPVO, DROID-SLAM). It forgives one global rotation.</li>
+      <li><b>Causal</b> (added for this report): the same, but each scan's position is taken <em>as it was first estimated</em>, before later scans could correct it. It shows what a robot would know at that moment, apart from the global rotation.</li>
+      <li><b>Online</b> (from the plan): the rotation is fixed from the first 30 s only. For WiFi alone this turned out to measure mostly <em>which way the map is turned</em>, not tracking (see §1, finding 5).</li>
+      <li><b>Drift per 5 m</b>: error of the displacement over every 5 m of travel. Needs no global position.</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h3>Fairness rules</h3>
+    <ul class="tight">
+      <li>Every weight and threshold was chosen on <b>synthetic sites</b> (24 sites for the solver, 48 runs for the gyro check), never on the 12 real runs.</li>
+      <li><b>Ceiling</b> rows use the truth (the true AP map, or the true gyro bias). They are limits, not methods.</li>
+      <li>3 evaluation seeds per method (random AP start positions); learned parts also over 3 trainings. Spreads are in the full table (§5).</li>
+      <li>One exception, labelled where it appears: the odometry weight sweep in §4 was run on the real runs, only to understand a trade-off.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="p1">
+  <div class="sec-head"><span class="label">1 · WiFi alone</span><h2>The new solver ties the best earlier method; the true AP map would gain only 0.27 m</h2></div>
+  <div class="panel wide">
+    <div class="scroll"><svg id="res-chart" class="minw" role="img" aria-label="Aligned, causal, online and drift errors for every WiFi-only method, grouped by family. The best methods are around 1.46 to 1.47 metres aligned."></svg></div>
+    <div class="key"><span><span class="sw" style="background:var(--c1)"></span>Radio Flow SLAM, hand-weighted</span><span><span class="sw" style="background:var(--c3)"></span>new learned parts</span><span><span class="sw" style="background:var(--c2)"></span>earlier methods</span><span><span class="sw" style="background:var(--ceil)"></span>ceilings (use the truth)</span><span><span class="sw" style="background:transparent;border-top:2px dashed var(--c2);height:0"></span>best earlier method (DPRO v1, network off, tuned)</span></div>
+    <p class="caption">Mean over the 12 runs of each run's median error. Hover a bar for all numbers. The online scale stops at 12 m.</p>
+  </div>
+  <div class="finding">
+    <h3>What it shows</h3>
+    <ol>
+      <li><b>A tie.</b> Best hand-weighted variant (radio flow + absolute RSSI + revisits): <span class="num">1.47 m</span>. Best earlier method: <span class="num">1.47 m</span>. Absolute RSSI alone in the new solver: <span class="num">1.46 m</span>. The differences are smaller than the spread over seeds (±0.04 to ±0.13 m).</li>
+      <li><b>The AP map is not the bottleneck.</b> Giving the solver the true AP positions and powers only reaches <span class="num">1.20 m</span> (absolute) and <span class="num">1.31 m</span> (radio flow). The limit is the RSSI itself: about ±3.5 dB random noise plus ±4.9 dB that depends on the place, the same for ~4 m.</li>
+      <li><b>Changes carry less than levels on real data.</b> Radio flow alone (<span class="num">1.59 m</span>) is worse than absolute RSSI alone (<span class="num">1.46 m</span>). The idea was that the change cancels the AP power and the phone gain. It does, but the place-dependent error does not cancel, and it dominates.</li>
+      <li><b>Averaging 3 scans helps on synthetic sites and hurts on real ones</b> (<span class="num">2.58 → 2.40 m</span> synthetic, <span class="num">1.59 → 1.74 m</span> real). It is not the phone repeating cached scans (identical consecutive readings: 11 %, about chance). My best guess: 3 scans span ~1.6 m, less than the ~4 m over which the place error stays the same, so averaging blurs the position without removing that error. Open question.</li>
+      <li><b>Online errors of 5–12 m say little about tracking.</b> Applying the same 30 s fit to the <em>final</em> path gives about the same (<span class="num">6.7–8.0 m</span>). In the first 30 s the robot moves only 0.7–5.4 m, and the 3 fixed start positions span less than 0.2 m on 8 of 12 runs. So the map can turn freely: the 30 s fit and the whole-run fit differ by a median of <span class="num">51–58°</span> for WiFi methods (<span class="num">1°</span> for odometry). The causal error (<span class="num">1.9–2.6 m</span>) is the fairer real-time number.</li>
+    </ol>
+  </div>
+  <div class="panel"><h3>Weights, chosen on 24 synthetic sites</h3><svg id="tune-chart" class="mid" role="img" aria-label="Error on synthetic sites against the weight of each factor type. Absolute RSSI is best at weight 1, radio flow at 0.3."></svg><div class="key" id="tune-key"></div><p class="caption">Each factor type's weight was swept on synthetic sites, and the best was then used unchanged on the real runs. Flow + absolute together: best at 0.03 and 1 (<span class="num">2.02 m</span>).</p></div>
+  <div class="panel"><h3>How far back to link scans</h3><svg id="k-chart" class="small" role="img" aria-label="Error against the number of previous scans linked: 2 gives 3.48 m, 4 gives 2.91, 8 gives 2.40, 12 gives 2.51."></svg><p class="caption">Synthetic sites, radio flow with 3-scan averages. Links up to 8 scans back (~6 m) work best, matching the earlier check that changes over 3–8 m carry real motion.</p></div>
+  <div class="panel wide">
+    <h3>Every run, aligned error (m)</h3>
+    <div class="scroll"><table id="perrun"></table></div>
+    <p class="caption">Darker = larger error (scale tops out at 3 m). Runs 4 and 9 are the two with the gyro fault (§4); WiFi methods handle them like any other run.</p>
+  </div>
+  <div class="maps" id="maps-wifi"></div>
+  <p class="caption">Paths after the whole-run fit, evaluation seed 0. Thick line = truth, dot = start. Run 7 (70 m, the only long run with a loop) is the hardest for every WiFi method: <span class="num">2.6–3.6 m</span>, vs <span class="num">1.33 m</span> with the true AP map.</p>
+</section>
+
+<section id="p2">
+  <div class="sec-head"><span class="label">2 · Recognising places seen before</span><h2>A learned check ranks better, but most proposed revisits are still wrong</h2></div>
+  <div class="panel">
+    <svg id="rev-chart" class="mid" role="img" aria-label="Share of revisit proposals that are really within 3 metres: raw 25 percent, learned 30 percent, learned with 3-scan sequences 32 percent. Best possible 61 percent. Gate 60 percent."></svg>
+    <p class="caption">All 12 runs, about 56 proposals in total (one per 6 scans per run, at most one per area). Light bar = within 3 m, dark part = within 2 m.</p>
+  </div>
+  <div class="panel">
+    <h3>How many true revisits each run even has</h3>
+    <svg id="avail-chart" class="mid" role="img" aria-label="Number of scan pairs at least 7 scans apart and within 3 metres, per run: from 0 in run 11 to 55 in run 2."></svg>
+    <p class="caption">Scan pairs at least 7 scans apart and less than 3 m apart. Runs 1, 3, 6 and 11 have almost none, so any proposal there is wrong. This is why the best possible is 61 %, and why my 60 % gate was nearly impossible.</p>
+  </div>
+  <div class="finding">
+    <h3>What it shows</h3>
+    <ol>
+      <li><b>The learned check ranks better.</b> Its ranking score (AUC) is <span class="num">0.87</span> vs <span class="num">0.78</span> for the raw distance between scans. Over all runs pooled, its top 10 % of true revisits come with <span class="num">90 %</span> precision vs <span class="num">51 %</span>.</li>
+      <li><b>That gain shrinks once proposals must be spread out.</b> With one proposal per area and a fixed number per run, <span class="num">32 %</span> are right (synthetic-only model) or <span class="num">30 %</span> (also trained on the other zone; <span class="num">32 %</span> when comparing 3-scan sequences), vs <span class="num">25 %</span> raw.</li>
+      <li><b>Training also on the other zone's real runs did not help</b> (AUC <span class="num">0.83</span> vs <span class="num">0.87</span> synthetic only).</li>
+      <li><b>No effect on the path.</b> Radio flow with 3-scan averages: <span class="num">1.74 m</span> without revisits, <span class="num">1.68 m</span> with raw revisits, <span class="num">1.74 m</span> with learned ones. The robust weighting already discounts most wrong links.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="p3">
+  <div class="sec-head"><span class="label">3 · The learned update</span><h2>It learns something real on synthetic sites; on real runs it mostly learns "trust less"</h2></div>
+  <p>Like DROID-SLAM: after the hand-weighted solve, a small network looks at every radio-flow link (its readings, how well the current path explains it, its neighbours) and proposes a corrected target and a new weight; the solver then re-solves, 12 times. It was trained on synthetic clips for 1,500 steps, 3 times with different seeds (≈30 min on CPU).</p>
+  <div class="panel"><h3>Training: learned minus hand-weighted, on the same synthetic clips</h3><svg id="train-chart" class="mid" role="img" aria-label="During training, the learned update's error minus the hand-weighted solver's error on the same synthetic clips, for 3 seeds. It goes from about zero to about minus 0.1 metres."></svg><p class="caption">Below zero = the network improves on the hand-weighted solve of the same clip. All 3 seeds end about <span class="num">0.1 m</span> below.</p></div>
+  <div class="two">
+    <div class="panel"><h3>Test on 30 new synthetic sites</h3><svg id="synth-chart" role="img" aria-label="Scatter of hand-weighted error against learned error on 30 new synthetic sites for 3 trainings; most points are below the diagonal."></svg><p class="caption">Mean <span class="num">2.19 → 2.00–2.05 m</span>, median <span class="num">2.02 → 1.53–1.74 m</span>; better on 21, 21 and 25 of 30 sites. So it does learn.</p></div>
+    <div class="panel"><h3>What it does on the real runs</h3><svg id="behav-chart" role="img" aria-label="Median weight multiplier chosen by the network for links 1 to 8 scans apart, from 0.78 down to 0.62, and for revisit links: 0.62 for true ones, 0.57 for wrong ones."></svg><p class="caption">Median weight multiplier per link (×1 = no change). It lowers every weight, long links more (×0.78 at 1 scan apart, ×0.62 at 8). It barely tells true revisits (×0.62) from wrong ones (×0.57). Targets move by only 0.5–1.1 dB.</p></div>
+  </div>
+  <div class="finding">
+    <h3>Results on the real runs</h3>
+    <ol>
+      <li><b>Inside the online loop</b> (2 learned steps after each scan, 12 at the end): <span class="num">1.455 m</span>, ±0.014 over the 3 trainings. Better than its own hand-weighted start on 8 of 12 runs. Drift <span class="num">2.19 → 1.97 m</span> per 5 m; causal <span class="num">2.18 → 2.08 m</span>.</li>
+      <li><b>Only at the end</b> (12 steps after the run): <span class="num">1.52 m</span>, worse than the start (1.47). Almost all of it is run 7 (+0.69 m), the only long run with loops; synthetic training clips have 32 scans.</li>
+      <li><b>Same pattern as DPRO v1:</b> large gains on synthetic, small on real, and what transfers is mostly "trust the RSSI less". The simulator still misses something about real RSSI.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="p4">
+  <div class="sec-head"><span class="label">4 · With wheel odometry</span><h2>WiFi as an extra sensor adds nothing; as a check it fixes a broken gyro, but the encoders do it better</h2></div>
+  <div class="panel wide">
+    <div class="scroll"><svg id="odo-chart" class="minw" role="img" aria-label="Aligned error per run for wheel odometry, odometry plus radio flow, and odometry plus the WiFi gyro-bias check. Odometry is under 0.35 metres except runs 4 and 9; the gyro check brings run 4 from 2.55 to 0.34 metres."></svg></div>
+    <div class="key" id="odo-key"></div>
+    <p class="caption">Aligned error per run (scale stops at 3 m). Wheel odometry is excellent on 10 runs (<span class="num">0.02–0.32 m</span>) and broken on runs 4 and 9 ("gyro bias").</p>
+  </div>
+  <div class="finding">
+    <h3>Step by step</h3>
+    <ol>
+      <li><b>Odometry is far better than WiFi here:</b> <span class="num">0.48 m</span> vs <span class="num">1.47 m</span>, and <span class="num">0.02–0.32 m</span> on 10 of 12 runs. The runs are short (≤70 m), so odometry barely drifts.</li>
+      <li><b>Adding radio flow to the odometry changes nothing on average</b> (<span class="num">0.48 → 0.48 m</span>). It helps a little where odometry fails (run 4: 2.55 → 2.38 m) and hurts a little where it is good (run 7: 0.32 → 0.44 m).</li>
+      <li><b>More WiFi weight does not rescue the broken runs</b> (first chart below; swept on the real runs, so a diagnostic only). At 30× the tuned weight, runs 4 and 9 improve only from <span class="num">2.39 m</span> (odometry alone) to <span class="num">2.03 m</span> on average, while the other 10 runs go from <span class="num">0.10</span> to <span class="num">0.37 m</span>.</li>
+      <li><b>Why: the gyro has a constant bias.</b> In runs 4 and 9 the step lengths are right, but the odometry heading turns at a steady wrong rate: <span class="num">−21.9</span> and <span class="num">+4.6</span> °/s compared with the truth (residual 2–3°; all other runs under 0.1 °/s). The error is spread over every step, so no single step looks wrong to the solver.</li>
+      <li><b>A constant bias is one unknown per run, and WiFi can estimate it.</b> For each candidate bias, the odometry is un-rotated, every AP's model is fitted to that path, and we measure how well the path explains the RSSI. A curled path explains it badly. The best bias is kept only if it fits clearly better than "no bias" (margin <span class="num">1.3×</span>, chosen on synthetic runs).</li>
+    </ol>
+  </div>
+  <div class="panel"><h3>Diagnostic: more WiFi weight</h3><svg id="odo-diag-chart" class="small" role="img" aria-label="Mean aligned error against radio-flow weight, for runs 4 and 9 and for the other 10 runs. More weight barely helps the broken runs and hurts the good ones."></svg><p class="caption">Dotted lines: odometry alone. Swept on the real runs (seed 0), for understanding only.</p></div>
+  <div class="panel"><h3>How well each candidate bias explains the RSSI</h3><svg id="gyro-curve-chart" class="mid" role="img" aria-label="RSSI misfit against candidate gyro bias for runs 4, 9, 7 and 1. Run 4 has a deep minimum near minus 22 degrees per second; run 7 is flat with its minimum at zero."></svg><div class="key" id="gyro-key"></div><p class="caption">Lower = the path explains the RSSI better; dots = best bias found. Run 4: a deep minimum at <span class="num">−22.4</span> °/s (true −21.9). Run 9: a shallower one at <span class="num">+3.9</span> (true +4.6). Run 7 (healthy): minimum at 0. Run 1 (healthy, 14 scans): a false minimum at +4.1, not deep enough to pass.</p></div>
+  <div class="panel">
+    <h3>Setting the margin without the real runs</h3>
+    <svg id="gyro-cal-chart" class="mid" role="img" aria-label="Fit improvement for 24 synthetic runs without bias, 24 with a bias, and the 12 real runs, with the chosen margin of 1.3. Real run 4 is far above, run 9 just below at 1.16."></svg>
+    <p class="caption">48 synthetic runs of 12–60 scans; half get a bias of 2–25 °/s. With a 1.3× margin: <b>no false correction</b> among the 24 runs without bias (their best was 1.20×), 21 of 24 biased runs corrected, bias error median <span class="num">0.9</span> °/s. On our runs: run 4 corrected (1.65×), run 9 not (1.16×), no healthy run touched (at most 1.10×).</p>
+  </div>
+  <div class="maps" id="maps-odo"></div>
+  <p class="caption">Run 4: the raw odometry curls up; after the check it follows the truth. Run 9: the check did not trigger (1.16× is below the 1.3× margin), so its line is the odometry's.</p>
+  <div class="callout">
+    <h3>Result</h3>
+    <p>After the run, the WiFi gyro-bias check brings the odometry from <span class="num">0.48</span> to <span class="num">0.30 m</span> on average (drift <span class="num">0.57 → 0.33 m</span> per 5 m), entirely through run 4 (<span class="num">2.55 → 0.34 m</span>). Removing the <em>true</em> bias would reach <span class="num">0.11 m</span>, so run 9 is the remaining gap. With a margin of 1.15 (almost as good on synthetic: 0.71 vs 0.69 m) run 9 would also have been fixed (2.23 → 1.10 m) with no false correction on our runs, but changing the margin after seeing the real runs would not be fair, so 1.3 stays.</p>
+  </div>
+  <div class="note">
+    <h3>Not yet in real time</h3>
+    <p>Re-estimating the bias as scans arrive gives no gain yet (causal <span class="num">0.48 m</span>, same as odometry). On run 4 the bias is spotted after 8 scans (−20 °/s) but the estimate wanders to −28 to −31 °/s mid-run before settling, and a 7 °/s error spins the latest position. On healthy run 8, one spurious trigger at scan 12 moved that scan 6.6 m. A real-time version needs a stability rule (several agreeing scans, a growing margin).</p>
+  </div>
+  <div class="note">
+    <h3>The wheel encoders already see this fault</h3>
+    <p>The robot's /odom heading comes from the IMU gyro (drift <span class="num">−21.86</span> and <span class="num">+4.54</span> °/s on runs 4 and 9). Heading from the wheel encoders alone drifts by only <span class="num">−0.14</span> and <span class="num">−0.11</span> °/s there. Plain encoder dead reckoning, with no gyro and no WiFi, reaches <span class="num">0.13 m</span> on average (run 4: <span class="num">0.09 m</span>, run 9: <span class="num">0.12 m</span>), better than the WiFi check's 0.30 m. On healthy runs the gyro heading is a little better (run 5: 0.04 vs 0.20 m), so the right odometry baseline is encoders and gyro checked against each other. I found this only after the main runs (<code>dpro/rf/encoder_odometry.py</code>).</p>
+  </div>
+</section>
+
+<section id="table">
+  <div class="sec-head"><span class="label">5 · Full table</span><h2>Every method, every metric</h2></div>
+  <div class="panel wide scroll">
+    <table>
+      <thead><tr><th>method</th><th>aligned (m)</th><th>spread</th><th>causal (m)</th><th>online (m)</th><th>drift per 5 m (m)</th><th>trainings × seeds</th></tr></thead>
+      <tbody id="all-tbody"></tbody>
+    </table>
+    <p class="caption">Spread = standard deviation of the 12-run mean of the aligned error, over trainings (learned parts) or over evaluation seeds. Also in <code>dpro/rf/results/summary.json</code>.</p>
+  </div>
+</section>
+
+<section id="next">
+  <div class="sec-head"><span class="label">6 · What this means</span><h2>WiFi alone is near its limit; WiFi belongs on faults the robot cannot see itself</h2></div>
+  <ol class="tight">
+    <li><b>On these runs, WiFi alone is close to its limit (~1.2–1.5 m).</b> Four different solvers (DPRO v1, the radio-flow graph, the learned update, the true-AP ceiling) all land between 1.20 and 1.53 m. More modelling of the same signal is unlikely to move this much.</li>
+    <li><b>Fix the odometry baseline first</b> (≈0.5 day): integrate the wheel encoders, check their heading against the gyro, and use that as the odometry row (encoders alone: 0.13 m).</li>
+    <li><b>Aim WiFi at faults the robot cannot see itself</b> (≈2 days): wheel slip, being lifted or carried, or encoders and gyro disagreeing with no way to tell which is right; made real-time with a stability rule, using the same "how well does this path explain the RSSI" test.</li>
+    <li><b>Record longer runs with loops</b> (robot time): our runs are 5–70 m with few revisits, too short for odometry to drift and too few loops for revisits to matter. That is where WiFi should help most.</li>
+    <li><b>Fix the simulator before more learning:</b> both networks (v1 and this one) learn real gains on synthetic sites that mostly vanish on real runs, and 3-scan averaging behaves differently in the two worlds.</li>
+  </ol>
+</section>
+
+<section id="honest">
+  <div class="sec-head"><span class="label">7 · Honest notes</span><h2>What to keep in mind when reading these numbers</h2></div>
+  <ul class="tight">
+    <li><b>Two of my gates were badly set.</b> Phase 2's 60 % was nearly impossible (best possible 61 %). Phase 4 assumed long runs where odometry drifts; ours are short.</li>
+    <li><b>The online metric</b> from the plan mostly measures the map's rotation for WiFi-only methods. I kept it and added the causal metric.</li>
+    <li><b>The gyro fault was found by looking at the truth</b> for runs 4 and 9. The fix uses no truth and its margin was set on synthetic runs, but only 2 real runs have the fault: far too few to claim a detection rate.</li>
+    <li><b>The phase 4 baseline was too weak.</b> I compared WiFi against /odom, whose heading is the biased gyro, not against the wheel encoders, which reach 0.13 m on their own. The WiFi gyro-bias check stands as evidence that WiFi carries heading information, not as the best fix for this robot.</li>
+    <li><b>Small data:</b> 12 short runs in 2 zones of one building, 370 scans. Differences under ~0.1 m between methods are within the seed spread.</li>
+    <li><b>DPRO v1 is 1.53 m here and 1.51 m in the notebook:</b> same code and trainings, different evaluation seeds.</li>
+    <li><b>Aligned errors forgive one global rotation</b> (as in the literature). The causal and drift numbers do not depend on that, and they tell the same story.</li>
+  </ul>
+</section>
+
+<section id="repro">
+  <div class="sec-head"><span class="label">8 · Reproduce</span><h2>Code, commands, outputs</h2></div>
+  <p>Package <code>side_navlori/dpro/rf</code>; WSL venv <code>/root/navlori/venv</code>; all on CPU (no GPU used). About 1 h 20 min end to end on the fablab box.</p>
+<pre>python -m dpro.rf.tune --out rf_tune.json                       # phase 1 weights, 24 synthetic sites (~10 min)
+python -m dpro.rf.tune_extra --tune rf_tune.json                # wider grid where the best sat on the edge
+bash tools/notebook_runs/train_rf_revisit.sh                    # phase 2: learned revisit check, 3 variants
+python -m dpro.rf.eval_revisit --models /root/navlori/runs/dpro/revisit --out revisit_eval.json
+bash tools/notebook_runs/train_rf_net.sh                        # phase 3: 3 trainings in parallel (~30 min)
+python -m dpro.rf.odometry --tune rf_tune.json --out rf_tune_odo.json   # phase 4 weights (synthetic)
+python -m dpro.rf.odo_diag --out results/odo_diag.json          # phase 4 weight diagnostic (real runs, not a method)
+python -m dpro.rf.gyro_bias --out results/gyro_bias.json        # gyro check: margin on synthetic, estimates on real (~2 min)
+bash tools/notebook_runs/eval_rf.sh rf|v1|ctx|rev|odo           # every method on the 12 runs, 3 seeds
+bash tools/notebook_runs/eval_rf_phase3.sh                      # learned rows, gyro rows, synthetic test, behaviour
+python -m dpro.rf.summarize --results rf_results.pkl --out results/summary.json
+python -m dpro.rf.export_report --runs /root/navlori/runs/dpro --res dpro/rf/results --out report_data.json</pre>
+  <p class="caption">Small results (weights, summaries, gyro estimates, synthetic test, network behaviour) are committed in <code>dpro/rf/results/</code>; checkpoints and the full results pickle stay in <code>/root/navlori/runs/dpro</code>.</p>
+</section>
+
+</div>
+<div class="tip" id="tip" role="tooltip"></div>
+<script type="application/json" id="report-data">/*DATA*/</script>
+<script>
+/*JS*/
+</script>

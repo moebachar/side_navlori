@@ -1,0 +1,2080 @@
+{
+ "methods": {
+  "WkNN + radio map": {
+   "aligned": 1.749452488584937,
+   "aligned_sd_seed": 0.0,
+   "aligned_sd_train": 0.0,
+   "causal": 1.749452488584937,
+   "causal_sd_seed": 0.0,
+   "causal_sd_train": 0.0,
+   "online": 4.870179297329392,
+   "online_sd_seed": 0.0,
+   "online_sd_train": 0.0,
+   "drift5": 2.592334925814668,
+   "drift5_sd_seed": 0.0,
+   "drift5_sd_train": 0.0,
+   "n_rows": 12,
+   "trainings": 1,
+   "seeds": 1
+  },
+  "abs, all APs (v1 solver, no patches)": {
+   "aligned": 1.4575786721630566,
+   "aligned_sd_seed": 0.1261793061007004,
+   "aligned_sd_train": 0.0,
+   "causal": 2.2735049611588987,
+   "causal_sd_seed": 0.21692619494673537,
+   "causal_sd_train": 0.0,
+   "online": 7.746960536516839,
+   "online_sd_seed": 1.288815509528174,
+   "online_sd_train": 0.0,
+   "drift5": 2.1039835779238025,
+   "drift5_sd_seed": 0.08019381327089682,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "ceiling: abs with true APs": {
+   "aligned": 1.202785954781133,
+   "aligned_sd_seed": 0.0,
+   "aligned_sd_train": 0.0,
+   "causal": 1.6751850130649508,
+   "causal_sd_seed": 0.0,
+   "causal_sd_train": 0.0,
+   "online": 6.048610878904182,
+   "online_sd_seed": 0.0,
+   "online_sd_train": 0.0,
+   "drift5": 1.8279144390337045,
+   "drift5_sd_seed": 0.0,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "ceiling: odometry with the true gyro bias removed": {
+   "aligned": 0.10941770527393786,
+   "aligned_sd_seed": 0.0,
+   "aligned_sd_train": 0.0,
+   "causal": 0.10941770527393786,
+   "causal_sd_seed": 0.0,
+   "causal_sd_train": 0.0,
+   "online": 0.22537929543026292,
+   "online_sd_seed": 0.0,
+   "online_sd_train": 0.0,
+   "drift5": 0.11018107523130606,
+   "drift5_sd_seed": 0.0,
+   "drift5_sd_train": 0.0,
+   "n_rows": 12,
+   "trainings": 1,
+   "seeds": 1
+  },
+  "ceiling: radio flow with true APs": {
+   "aligned": 1.3094121437683528,
+   "aligned_sd_seed": 0.0,
+   "aligned_sd_train": 0.0,
+   "causal": 1.7900448099033037,
+   "causal_sd_seed": 0.0,
+   "causal_sd_train": 0.0,
+   "online": 6.605622639010506,
+   "online_sd_seed": 0.0,
+   "online_sd_train": 0.0,
+   "drift5": 2.071287104463923,
+   "drift5_sd_seed": 0.0,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "learned update (also while streaming)": {
+   "aligned": 1.4546892063675516,
+   "aligned_sd_seed": 0.057207356003586514,
+   "aligned_sd_train": 0.013683466140296963,
+   "causal": 2.075649929691754,
+   "causal_sd_seed": 0.11395231765173945,
+   "causal_sd_train": 0.08941670824338618,
+   "online": 7.746233185619065,
+   "online_sd_seed": 1.1086659732671296,
+   "online_sd_train": 0.10610620452606184,
+   "drift5": 1.9713934989858004,
+   "drift5_sd_seed": 0.07651414612828102,
+   "drift5_sd_train": 0.08289668550159354,
+   "n_rows": 108,
+   "trainings": 3,
+   "seeds": 3
+  },
+  "learned update (final refinement)": {
+   "aligned": 1.5224213150619,
+   "aligned_sd_seed": 0.06554688437372165,
+   "aligned_sd_train": 0.023431624393399155,
+   "causal": 2.179090452780594,
+   "causal_sd_seed": 0.1453768961001979,
+   "causal_sd_train": 0.0,
+   "online": 7.753626032411368,
+   "online_sd_seed": 1.2101752073069338,
+   "online_sd_train": 0.0,
+   "drift5": 2.0983506321245478,
+   "drift5_sd_seed": 0.08990530032153939,
+   "drift5_sd_train": 0.03961750357098506,
+   "n_rows": 108,
+   "trainings": 3,
+   "seeds": 3
+  },
+  "motion rules only": {
+   "aligned": 3.565012554947242,
+   "aligned_sd_seed": 0.0,
+   "aligned_sd_train": 0.0,
+   "causal": 3.6502043667097723,
+   "causal_sd_seed": 0.0,
+   "causal_sd_train": 0.0,
+   "online": 11.751252212135775,
+   "online_sd_seed": 0.0,
+   "online_sd_train": 0.0,
+   "drift5": 3.696169644439682,
+   "drift5_sd_seed": 0.0,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "odometry + WiFi gyro-bias check": {
+   "aligned": 0.2974979908372087,
+   "aligned_sd_seed": 0.0,
+   "aligned_sd_train": 0.0,
+   "causal": 0.4770878307767303,
+   "causal_sd_seed": 0.0,
+   "causal_sd_train": 0.0,
+   "online": 0.9957610223788728,
+   "online_sd_seed": 0.0,
+   "online_sd_train": 0.0,
+   "drift5": 0.33078994378558213,
+   "drift5_sd_seed": 0.0,
+   "drift5_sd_train": 0.0,
+   "n_rows": 12,
+   "trainings": 1,
+   "seeds": 1
+  },
+  "odometry + radio flow": {
+   "aligned": 0.48357501919672646,
+   "aligned_sd_seed": 0.0021319614209372815,
+   "aligned_sd_train": 0.0,
+   "causal": 0.49161691082493036,
+   "causal_sd_seed": 0.005138182469970522,
+   "causal_sd_train": 0.0,
+   "online": 0.9607681928679629,
+   "online_sd_seed": 0.015079781637030186,
+   "online_sd_train": 0.0,
+   "drift5": 0.5632619756857283,
+   "drift5_sd_seed": 0.003990463183730435,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "odometry + radio flow + raw revisits": {
+   "aligned": 0.48085200077392765,
+   "aligned_sd_seed": 0.002318094946762063,
+   "aligned_sd_train": 0.0,
+   "causal": 0.49161691082493036,
+   "causal_sd_seed": 0.005138182469970522,
+   "causal_sd_train": 0.0,
+   "online": 0.9607681928679629,
+   "online_sd_seed": 0.015079781637030186,
+   "online_sd_train": 0.0,
+   "drift5": 0.5644448894677012,
+   "drift5_sd_seed": 0.004829117656980871,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "odometry in the solver, no WiFi": {
+   "aligned": 0.4826423844509913,
+   "aligned_sd_seed": 0.0,
+   "aligned_sd_train": 0.0,
+   "causal": 0.4826423844509913,
+   "causal_sd_seed": 0.0,
+   "causal_sd_train": 0.0,
+   "online": 0.9436114201385445,
+   "online_sd_seed": 0.0,
+   "online_sd_train": 0.0,
+   "drift5": 0.5678064529769746,
+   "drift5_sd_seed": 0.0,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "radio flow + abs, 3-scan average": {
+   "aligned": 1.4940498331257202,
+   "aligned_sd_seed": 0.14027785487969957,
+   "aligned_sd_train": 0.0,
+   "causal": 2.179090452780594,
+   "causal_sd_seed": 0.1453768961001979,
+   "causal_sd_train": 0.0,
+   "online": 7.753626032411368,
+   "online_sd_seed": 1.2101752073069338,
+   "online_sd_train": 0.0,
+   "drift5": 2.216559213222343,
+   "drift5_sd_seed": 0.09110916496745716,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+   "aligned": 1.471265122303999,
+   "aligned_sd_seed": 0.12910238367233787,
+   "aligned_sd_train": 0.0,
+   "causal": 2.179090452780594,
+   "causal_sd_seed": 0.1453768961001979,
+   "causal_sd_train": 0.0,
+   "online": 7.753626032411368,
+   "online_sd_seed": 1.2101752073069338,
+   "online_sd_train": 0.0,
+   "drift5": 2.19029047813232,
+   "drift5_sd_seed": 0.11591182941559229,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "radio flow, 3-scan average": {
+   "aligned": 1.73747357983814,
+   "aligned_sd_seed": 0.31708224001804064,
+   "aligned_sd_train": 0.0,
+   "causal": 2.567615507835019,
+   "causal_sd_seed": 0.39120841690753855,
+   "causal_sd_train": 0.0,
+   "online": 8.837385089556085,
+   "online_sd_seed": 0.4468919876551819,
+   "online_sd_train": 0.0,
+   "drift5": 2.2638647418165267,
+   "drift5_sd_seed": 0.1972252431205729,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "radio flow, 3-scan average + learned revisits": {
+   "aligned": 1.7359698452664558,
+   "aligned_sd_seed": 0.29228911467112306,
+   "aligned_sd_train": 0.0,
+   "causal": 2.567615507835019,
+   "causal_sd_seed": 0.39120841690753855,
+   "causal_sd_train": 0.0,
+   "online": 8.837385089556085,
+   "online_sd_seed": 0.4468919876551819,
+   "online_sd_train": 0.0,
+   "drift5": 2.303115404742005,
+   "drift5_sd_seed": 0.17976447201048423,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "radio flow, 3-scan average + raw revisits": {
+   "aligned": 1.6802961085151271,
+   "aligned_sd_seed": 0.1849350271048884,
+   "aligned_sd_train": 0.0,
+   "causal": 2.567615507835019,
+   "causal_sd_seed": 0.39120841690753855,
+   "causal_sd_train": 0.0,
+   "online": 8.837385089556085,
+   "online_sd_seed": 0.4468919876551819,
+   "online_sd_train": 0.0,
+   "drift5": 2.2549336825606514,
+   "drift5_sd_seed": 0.07737368706617019,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "radio flow, single scans": {
+   "aligned": 1.587785098661448,
+   "aligned_sd_seed": 0.0747081140817354,
+   "aligned_sd_train": 0.0,
+   "causal": 2.231824482903511,
+   "causal_sd_seed": 0.299211148295057,
+   "causal_sd_train": 0.0,
+   "online": 6.652828964613376,
+   "online_sd_seed": 1.0718468530233016,
+   "online_sd_train": 0.0,
+   "drift5": 2.2509021997513927,
+   "drift5_sd_seed": 0.04426384652529458,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "v1 DPRO": {
+   "aligned": 1.5273924294805648,
+   "aligned_sd_seed": 0.04475174068508341,
+   "aligned_sd_train": 0.029640340329653587,
+   "causal": 1.9282860099306862,
+   "causal_sd_seed": 0.08835224633239303,
+   "causal_sd_train": 0.05178150903881011,
+   "online": 7.2726206304277285,
+   "online_sd_seed": 1.2028293497733926,
+   "online_sd_train": 0.24288266826197966,
+   "drift5": 2.111018209670722,
+   "drift5_sd_seed": 0.06694900329292373,
+   "drift5_sd_train": 0.01255613300312057,
+   "n_rows": 108,
+   "trainings": 3,
+   "seeds": 3
+  },
+  "v1 network off": {
+   "aligned": 2.702709669635069,
+   "aligned_sd_seed": 0.100004724066381,
+   "aligned_sd_train": 0.0,
+   "causal": 2.695434718141542,
+   "causal_sd_seed": 0.20535633469518005,
+   "causal_sd_train": 0.0,
+   "online": 6.638134747960372,
+   "online_sd_seed": 0.03193056909797186,
+   "online_sd_train": 0.0,
+   "drift5": 3.1511598923703104,
+   "drift5_sd_seed": 0.1916976345727364,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "v1 network off, tuned": {
+   "aligned": 1.4659654190210174,
+   "aligned_sd_seed": 0.0360979483636115,
+   "aligned_sd_train": 0.0,
+   "causal": 2.2343300688943084,
+   "causal_sd_seed": 0.053657397770564046,
+   "causal_sd_train": 0.0,
+   "online": 8.320627954636612,
+   "online_sd_seed": 1.8122360631917698,
+   "online_sd_train": 0.0,
+   "drift5": 2.0856761749298736,
+   "drift5_sd_seed": 0.05066416270383636,
+   "drift5_sd_train": 0.0,
+   "n_rows": 36,
+   "trainings": 1,
+   "seeds": 3
+  },
+  "wheel odometry": {
+   "aligned": 0.4818226925346473,
+   "aligned_sd_seed": 0.0,
+   "aligned_sd_train": 0.0,
+   "causal": 0.4818226925346473,
+   "causal_sd_seed": 0.0,
+   "causal_sd_train": 0.0,
+   "online": 0.9360109637101712,
+   "online_sd_seed": 0.0,
+   "online_sd_train": 0.0,
+   "drift5": 0.5669330549518695,
+   "drift5_sd_seed": 0.0,
+   "drift5_sd_train": 0.0,
+   "n_rows": 12,
+   "trainings": 1,
+   "seeds": 1
+  }
+ },
+ "per_run": {
+  "WkNN + radio map": {
+   "aligned": {
+    "golden_run_1": 0.7609964171122652,
+    "golden_run_10": 3.2433066231415846,
+    "golden_run_11": 1.6346739875665852,
+    "golden_run_12": 1.6956746716697608,
+    "golden_run_2": 1.6776178349788156,
+    "golden_run_3": 0.8025727482349007,
+    "golden_run_4": 1.0612342349128134,
+    "golden_run_5": 1.92647158799019,
+    "golden_run_6": 0.9069434374100744,
+    "golden_run_7": 3.105531687431437,
+    "golden_run_8": 2.362255911933744,
+    "golden_run_9": 1.816150720637074
+   },
+   "causal": {
+    "golden_run_1": 0.7609964171122652,
+    "golden_run_10": 3.2433066231415846,
+    "golden_run_11": 1.6346739875665852,
+    "golden_run_12": 1.6956746716697608,
+    "golden_run_2": 1.6776178349788156,
+    "golden_run_3": 0.8025727482349007,
+    "golden_run_4": 1.0612342349128134,
+    "golden_run_5": 1.92647158799019,
+    "golden_run_6": 0.9069434374100744,
+    "golden_run_7": 3.105531687431437,
+    "golden_run_8": 2.362255911933744,
+    "golden_run_9": 1.816150720637074
+   },
+   "online": {
+    "golden_run_1": 4.6246384939835465,
+    "golden_run_10": 2.180981653418819,
+    "golden_run_11": 4.237656564802201,
+    "golden_run_12": 3.5151014005939185,
+    "golden_run_2": 3.7962286485592163,
+    "golden_run_3": 0.831785218600995,
+    "golden_run_4": 9.739296598656953,
+    "golden_run_5": 4.0068439750604075,
+    "golden_run_6": 1.336548166403147,
+    "golden_run_7": 12.617894687507096,
+    "golden_run_8": 8.661097582542919,
+    "golden_run_9": 2.8940785778234845
+   },
+   "drift5": {
+    "golden_run_1": 0.8895794827163018,
+    "golden_run_10": 3.5835517018494283,
+    "golden_run_11": 2.2177176371848075,
+    "golden_run_12": 3.359894447616863,
+    "golden_run_2": 3.504563175420733,
+    "golden_run_3": 1.337000831778875,
+    "golden_run_4": 2.0957353234359313,
+    "golden_run_5": 3.50063263502149,
+    "golden_run_6": 1.3181387066319439,
+    "golden_run_7": 3.191636603212476,
+    "golden_run_8": 3.411255496115054,
+    "golden_run_9": 2.6983130687921126
+   }
+  },
+  "abs, all APs (v1 solver, no patches)": {
+   "aligned": {
+    "golden_run_1": 0.9240484693995671,
+    "golden_run_10": 1.4662811888857525,
+    "golden_run_11": 1.3859093698303735,
+    "golden_run_12": 1.5278787227067696,
+    "golden_run_2": 1.8186687354921665,
+    "golden_run_3": 0.5673880838925759,
+    "golden_run_4": 0.8551764919118092,
+    "golden_run_5": 2.5158481152062717,
+    "golden_run_6": 0.7693051088518393,
+    "golden_run_7": 3.12215253604448,
+    "golden_run_8": 1.3445541340424878,
+    "golden_run_9": 1.1937331096925858
+   },
+   "causal": {
+    "golden_run_1": 1.2702307904867005,
+    "golden_run_10": 2.077632692730835,
+    "golden_run_11": 1.3488817750823614,
+    "golden_run_12": 2.270558511683099,
+    "golden_run_2": 2.9090955447957536,
+    "golden_run_3": 1.0052695025526732,
+    "golden_run_4": 2.240054900298568,
+    "golden_run_5": 3.516684636336231,
+    "golden_run_6": 1.4169577555491937,
+    "golden_run_7": 4.7500509278557566,
+    "golden_run_8": 2.518866036820565,
+    "golden_run_9": 1.9577764597150464
+   },
+   "online": {
+    "golden_run_1": 3.4934627102861238,
+    "golden_run_10": 9.677900855901171,
+    "golden_run_11": 2.9954279384822304,
+    "golden_run_12": 7.001960397511457,
+    "golden_run_2": 12.429485075169666,
+    "golden_run_3": 1.5412881086466819,
+    "golden_run_4": 8.028147832125025,
+    "golden_run_5": 8.160379834167584,
+    "golden_run_6": 3.842589971459081,
+    "golden_run_7": 21.101872544253624,
+    "golden_run_8": 5.668999422763574,
+    "golden_run_9": 9.022011747435846
+   },
+   "drift5": {
+    "golden_run_1": 2.138524586465639,
+    "golden_run_10": 1.9885269029153807,
+    "golden_run_11": 1.9494520111425544,
+    "golden_run_12": 2.0226232440981207,
+    "golden_run_2": 2.998382316425216,
+    "golden_run_3": 1.6659860707629244,
+    "golden_run_4": 1.6087715223050576,
+    "golden_run_5": 3.496284138321661,
+    "golden_run_6": 1.7805718869193308,
+    "golden_run_7": 2.4060447323859857,
+    "golden_run_8": 1.6335900555252971,
+    "golden_run_9": 1.559045467818464
+   }
+  },
+  "ceiling: abs with true APs": {
+   "aligned": {
+    "golden_run_1": 0.941292057733261,
+    "golden_run_10": 1.302405685964115,
+    "golden_run_11": 1.427983858205898,
+    "golden_run_12": 0.4751901826030421,
+    "golden_run_2": 1.574668060796289,
+    "golden_run_3": 0.6699694005048168,
+    "golden_run_4": 0.8996390632585051,
+    "golden_run_5": 1.338364192423686,
+    "golden_run_6": 1.0377044049344493,
+    "golden_run_7": 1.3312970701569697,
+    "golden_run_8": 2.426234141146698,
+    "golden_run_9": 1.008683339645865
+   },
+   "causal": {
+    "golden_run_1": 1.3332936105906756,
+    "golden_run_10": 2.0612722462983086,
+    "golden_run_11": 1.3489344611101413,
+    "golden_run_12": 1.0248756333509992,
+    "golden_run_2": 3.2552196751878886,
+    "golden_run_3": 1.1104320335632014,
+    "golden_run_4": 2.1426861572190945,
+    "golden_run_5": 1.1340999740121187,
+    "golden_run_6": 1.4539863394805945,
+    "golden_run_7": 1.5924246084544116,
+    "golden_run_8": 2.088463236278499,
+    "golden_run_9": 1.556532181233478
+   },
+   "online": {
+    "golden_run_1": 2.6504991097228903,
+    "golden_run_10": 3.480096856402876,
+    "golden_run_11": 3.403640127479685,
+    "golden_run_12": 11.5467776443453,
+    "golden_run_2": 7.163086400982526,
+    "golden_run_3": 1.6369270652974475,
+    "golden_run_4": 2.8545128072871004,
+    "golden_run_5": 4.195696782441625,
+    "golden_run_6": 1.356872790229497,
+    "golden_run_7": 22.308046686733604,
+    "golden_run_8": 7.3013579760680125,
+    "golden_run_9": 4.685816299859631
+   },
+   "drift5": {
+    "golden_run_1": 2.1897955517401604,
+    "golden_run_10": 1.6405560410812612,
+    "golden_run_11": 1.4354688053866458,
+    "golden_run_12": 0.7508071283194452,
+    "golden_run_2": 2.519986684819143,
+    "golden_run_3": 1.9197199292804703,
+    "golden_run_4": 1.8672368280776868,
+    "golden_run_5": 1.8885063788984606,
+    "golden_run_6": 1.9341394038683724,
+    "golden_run_7": 1.3632851975317706,
+    "golden_run_8": 3.308085896680335,
+    "golden_run_9": 1.1173854227207058
+   }
+  },
+  "ceiling: odometry with the true gyro bias removed": {
+   "aligned": {
+    "golden_run_1": 0.033537284171275716,
+    "golden_run_10": 0.24334114668406603,
+    "golden_run_11": 0.16669184991245917,
+    "golden_run_12": 0.06313853874070402,
+    "golden_run_2": 0.031722697963032745,
+    "golden_run_3": 0.021946186411159904,
+    "golden_run_4": 0.2894755598638081,
+    "golden_run_5": 0.04378639461169521,
+    "golden_run_6": 0.026694994313452285,
+    "golden_run_7": 0.32091903362437957,
+    "golden_run_8": 0.03676933875684217,
+    "golden_run_9": 0.034989438234379465
+   },
+   "causal": {
+    "golden_run_1": 0.033537284171275716,
+    "golden_run_10": 0.24334114668406603,
+    "golden_run_11": 0.16669184991245917,
+    "golden_run_12": 0.06313853874070402,
+    "golden_run_2": 0.031722697963032745,
+    "golden_run_3": 0.021946186411159904,
+    "golden_run_4": 0.2894755598638081,
+    "golden_run_5": 0.04378639461169521,
+    "golden_run_6": 0.026694994313452285,
+    "golden_run_7": 0.32091903362437957,
+    "golden_run_8": 0.03676933875684217,
+    "golden_run_9": 0.034989438234379465
+   },
+   "online": {
+    "golden_run_1": 0.07519314002360805,
+    "golden_run_10": 0.4813769514357872,
+    "golden_run_11": 0.2681265467596338,
+    "golden_run_12": 0.19521403616263303,
+    "golden_run_2": 0.056808668841251846,
+    "golden_run_3": 0.04263955112464507,
+    "golden_run_4": 0.661348085625813,
+    "golden_run_5": 0.05020584337760658,
+    "golden_run_6": 0.04230884322187495,
+    "golden_run_7": 0.7223423256315711,
+    "golden_run_8": 0.0554313712140239,
+    "golden_run_9": 0.05355618174470632
+   },
+   "drift5": {
+    "golden_run_1": 0.06349863978453599,
+    "golden_run_10": 0.20258464688953273,
+    "golden_run_11": 0.19891199811417826,
+    "golden_run_12": 0.06327408377998822,
+    "golden_run_2": 0.062123879646616705,
+    "golden_run_3": 0.04537623640822035,
+    "golden_run_4": 0.40557865301044205,
+    "golden_run_5": 0.04977905376306954,
+    "golden_run_6": 0.036217190969414316,
+    "golden_run_7": 0.06871628299209387,
+    "golden_run_8": 0.0661993011622655,
+    "golden_run_9": 0.05991293625531556
+   }
+  },
+  "ceiling: radio flow with true APs": {
+   "aligned": {
+    "golden_run_1": 0.8938305271638254,
+    "golden_run_10": 2.0637166838763705,
+    "golden_run_11": 0.9176422464843874,
+    "golden_run_12": 0.5619701852745507,
+    "golden_run_2": 1.6394672391038236,
+    "golden_run_3": 0.7767532279767154,
+    "golden_run_4": 0.8565611081768983,
+    "golden_run_5": 1.2881788563170755,
+    "golden_run_6": 0.7917668279481375,
+    "golden_run_7": 3.041046697218236,
+    "golden_run_8": 1.405766832575922,
+    "golden_run_9": 1.4762452931042904
+   },
+   "causal": {
+    "golden_run_1": 1.2697159694027538,
+    "golden_run_10": 2.611704442889359,
+    "golden_run_11": 1.1609822544495092,
+    "golden_run_12": 0.966710056184267,
+    "golden_run_2": 2.2758055153731593,
+    "golden_run_3": 1.1539167268628676,
+    "golden_run_4": 1.676757114652543,
+    "golden_run_5": 1.4641153991066214,
+    "golden_run_6": 0.8837099034345283,
+    "golden_run_7": 3.035464222118,
+    "golden_run_8": 2.927598520908695,
+    "golden_run_9": 2.0540575934573413
+   },
+   "online": {
+    "golden_run_1": 3.2415299885464983,
+    "golden_run_10": 3.849527118369245,
+    "golden_run_11": 2.472757752521659,
+    "golden_run_12": 10.310298404439392,
+    "golden_run_2": 11.317028764375964,
+    "golden_run_3": 2.046916182930691,
+    "golden_run_4": 2.1246604348478373,
+    "golden_run_5": 1.8779121171339257,
+    "golden_run_6": 1.0464208627747023,
+    "golden_run_7": 29.716742892705625,
+    "golden_run_8": 5.926996166539684,
+    "golden_run_9": 5.336680982940845
+   },
+   "drift5": {
+    "golden_run_1": 2.1307378087645104,
+    "golden_run_10": 2.4783792258378274,
+    "golden_run_11": 1.4729144893377215,
+    "golden_run_12": 0.8359375045109889,
+    "golden_run_2": 2.9088517144789985,
+    "golden_run_3": 2.2318780276785075,
+    "golden_run_4": 1.9411482567631777,
+    "golden_run_5": 2.7949060461756674,
+    "golden_run_6": 1.545651307112334,
+    "golden_run_7": 2.007184771164278,
+    "golden_run_8": 2.4216377601865897,
+    "golden_run_9": 2.0862183415564726
+   }
+  },
+  "learned update (also while streaming)": {
+   "aligned": {
+    "golden_run_1": 0.8543607084986042,
+    "golden_run_10": 1.4111012382595391,
+    "golden_run_11": 1.661430762865497,
+    "golden_run_12": 0.9920429575230991,
+    "golden_run_2": 1.8655745594295183,
+    "golden_run_3": 0.5331476833789467,
+    "golden_run_4": 0.7195216895187567,
+    "golden_run_5": 2.7116239457716436,
+    "golden_run_6": 0.7502000832753392,
+    "golden_run_7": 3.54201623069446,
+    "golden_run_8": 1.1483289844083113,
+    "golden_run_9": 1.2669216327869048
+   },
+   "causal": {
+    "golden_run_1": 1.2585322404175503,
+    "golden_run_10": 2.4002423314569463,
+    "golden_run_11": 1.8171932429140203,
+    "golden_run_12": 1.6662150173701624,
+    "golden_run_2": 3.036359587495863,
+    "golden_run_3": 1.012141159308185,
+    "golden_run_4": 1.6192515623437609,
+    "golden_run_5": 3.413903681513303,
+    "golden_run_6": 1.444436169126934,
+    "golden_run_7": 3.2242009786983665,
+    "golden_run_8": 2.151026820047621,
+    "golden_run_9": 1.8642963656083351
+   },
+   "online": {
+    "golden_run_1": 4.005751096202979,
+    "golden_run_10": 7.374511786007968,
+    "golden_run_11": 6.386336831539115,
+    "golden_run_12": 8.101426712171229,
+    "golden_run_2": 11.927032660279686,
+    "golden_run_3": 1.615666178501805,
+    "golden_run_4": 10.024186463285327,
+    "golden_run_5": 7.876825280600365,
+    "golden_run_6": 4.7598331760978185,
+    "golden_run_7": 19.38408460461209,
+    "golden_run_8": 6.415995079986846,
+    "golden_run_9": 5.08314835814355
+   },
+   "drift5": {
+    "golden_run_1": 2.037224340206139,
+    "golden_run_10": 1.9783316010916172,
+    "golden_run_11": 1.9901791342305246,
+    "golden_run_12": 1.3719695478078215,
+    "golden_run_2": 2.986344525879069,
+    "golden_run_3": 1.3594165888521343,
+    "golden_run_4": 1.6478899963561742,
+    "golden_run_5": 3.140182253580905,
+    "golden_run_6": 1.578802673892187,
+    "golden_run_7": 2.306270400398691,
+    "golden_run_8": 1.6812301997661256,
+    "golden_run_9": 1.578880725768215
+   }
+  },
+  "learned update (final refinement)": {
+   "aligned": {
+    "golden_run_1": 0.8582488862281389,
+    "golden_run_10": 1.6624204956269648,
+    "golden_run_11": 1.7732322067679014,
+    "golden_run_12": 1.2034717541126083,
+    "golden_run_2": 1.8540371037495207,
+    "golden_run_3": 0.5465871579773075,
+    "golden_run_4": 0.6499171959518901,
+    "golden_run_5": 2.9389250300581327,
+    "golden_run_6": 0.8118627306464613,
+    "golden_run_7": 3.630548019824344,
+    "golden_run_8": 1.1261287327522327,
+    "golden_run_9": 1.2136764670472955
+   },
+   "causal": {
+    "golden_run_1": 1.243322479106947,
+    "golden_run_10": 2.474298724520675,
+    "golden_run_11": 2.11290411276291,
+    "golden_run_12": 2.022050613604876,
+    "golden_run_2": 3.008120488037554,
+    "golden_run_3": 0.9976196444420116,
+    "golden_run_4": 2.1599537423164374,
+    "golden_run_5": 3.382520077809337,
+    "golden_run_6": 1.405714561332009,
+    "golden_run_7": 3.106128502139761,
+    "golden_run_8": 2.440970469480424,
+    "golden_run_9": 1.7954820178141888
+   },
+   "online": {
+    "golden_run_1": 4.0448694937374645,
+    "golden_run_10": 8.459396757658034,
+    "golden_run_11": 5.705299601312966,
+    "golden_run_12": 10.462240600563018,
+    "golden_run_2": 11.955113711525719,
+    "golden_run_3": 1.6205548471866456,
+    "golden_run_4": 10.442748736013792,
+    "golden_run_5": 7.6225827335759835,
+    "golden_run_6": 3.9031997385061947,
+    "golden_run_7": 14.91832177220164,
+    "golden_run_8": 7.16495427975242,
+    "golden_run_9": 6.744230116902543
+   },
+   "drift5": {
+    "golden_run_1": 2.0153017124218326,
+    "golden_run_10": 2.5947436164033237,
+    "golden_run_11": 2.0067598649831115,
+    "golden_run_12": 1.8320653427136624,
+    "golden_run_2": 2.9095943368340715,
+    "golden_run_3": 1.377002853086868,
+    "golden_run_4": 1.430703369233215,
+    "golden_run_5": 3.331741901876862,
+    "golden_run_6": 1.6128442346179446,
+    "golden_run_7": 2.7412946657773998,
+    "golden_run_8": 1.7185644181279056,
+    "golden_run_9": 1.609591269418376
+   }
+  },
+  "motion rules only": {
+   "aligned": {
+    "golden_run_1": 0.9039066487715163,
+    "golden_run_10": 3.87414538149452,
+    "golden_run_11": 0.7369067432142553,
+    "golden_run_12": 3.5126454915015324,
+    "golden_run_2": 2.8092095358750995,
+    "golden_run_3": 0.5445368274906781,
+    "golden_run_4": 1.7704569316881724,
+    "golden_run_5": 4.050486114959637,
+    "golden_run_6": 1.0086884224411814,
+    "golden_run_7": 13.297191157857569,
+    "golden_run_8": 4.497678905328019,
+    "golden_run_9": 5.774298498744723
+   },
+   "causal": {
+    "golden_run_1": 1.2366305340905415,
+    "golden_run_10": 3.7874367542575427,
+    "golden_run_11": 0.6632256987650654,
+    "golden_run_12": 3.333206668265349,
+    "golden_run_2": 3.009625929151833,
+    "golden_run_3": 0.9421807580290089,
+    "golden_run_4": 2.019096562217341,
+    "golden_run_5": 4.1812427797135,
+    "golden_run_6": 1.160802973202679,
+    "golden_run_7": 13.22426281366105,
+    "golden_run_8": 4.4926185613309215,
+    "golden_run_9": 5.752122367832441
+   },
+   "online": {
+    "golden_run_1": 3.6625211000985956,
+    "golden_run_10": 10.29403674872497,
+    "golden_run_11": 1.8683379078515945,
+    "golden_run_12": 13.630955649500088,
+    "golden_run_2": 12.68086045646964,
+    "golden_run_3": 1.4022035411173501,
+    "golden_run_4": 10.441291030501223,
+    "golden_run_5": 10.387635934007575,
+    "golden_run_6": 4.350134705109371,
+    "golden_run_7": 52.881037552665305,
+    "golden_run_8": 7.240089967530078,
+    "golden_run_9": 12.175921952053516
+   },
+   "drift5": {
+    "golden_run_1": 1.9940329535640762,
+    "golden_run_10": 4.3620109806029195,
+    "golden_run_11": 0.7356885260530657,
+    "golden_run_12": 4.458456566230051,
+    "golden_run_2": 4.098318720569776,
+    "golden_run_3": 1.5988950615580064,
+    "golden_run_4": 2.252291368417879,
+    "golden_run_5": 3.7932824167631547,
+    "golden_run_6": 1.7515163207523539,
+    "golden_run_7": 6.831614893461502,
+    "golden_run_8": 5.974164862106046,
+    "golden_run_9": 6.503763063197357
+   }
+  },
+  "odometry + WiFi gyro-bias check": {
+   "aligned": {
+    "golden_run_1": 0.03193206005795096,
+    "golden_run_10": 0.1757316571285461,
+    "golden_run_11": 0.1661150875011287,
+    "golden_run_12": 0.12389683486398322,
+    "golden_run_2": 0.03015422348431621,
+    "golden_run_3": 0.023114303490145153,
+    "golden_run_4": 0.3380210230798161,
+    "golden_run_5": 0.0413628233422613,
+    "golden_run_6": 0.03157852093831342,
+    "golden_run_7": 0.3157371513504655,
+    "golden_run_8": 0.05820002719903119,
+    "golden_run_9": 2.2341321776105465
+   },
+   "causal": {
+    "golden_run_1": 0.03193206005795078,
+    "golden_run_10": 0.1757316571285461,
+    "golden_run_11": 0.1661150875011291,
+    "golden_run_12": 0.12389683486398322,
+    "golden_run_2": 0.030154223484316733,
+    "golden_run_3": 0.023114303490144386,
+    "golden_run_4": 2.307650087942621,
+    "golden_run_5": 0.041362823342257646,
+    "golden_run_6": 0.03157852093831347,
+    "golden_run_7": 0.3157371513504655,
+    "golden_run_8": 0.30999026356220005,
+    "golden_run_9": 2.1677909556588357
+   },
+   "online": {
+    "golden_run_1": 0.06426944380175548,
+    "golden_run_10": 0.37338125315086035,
+    "golden_run_11": 0.27515841870803515,
+    "golden_run_12": 0.4364972379521664,
+    "golden_run_2": 0.053536288681687846,
+    "golden_run_3": 0.0439290632875541,
+    "golden_run_4": 4.332122501266388,
+    "golden_run_5": 0.05023800999813662,
+    "golden_run_6": 0.061041275105421566,
+    "golden_run_7": 0.710877827767302,
+    "golden_run_8": 0.10570328854894226,
+    "golden_run_9": 5.442377660278223
+   },
+   "drift5": {
+    "golden_run_1": 0.058043105985464014,
+    "golden_run_10": 0.21446998861194722,
+    "golden_run_11": 0.19753347375157027,
+    "golden_run_12": 0.13482272205591783,
+    "golden_run_2": 0.05918430313708711,
+    "golden_run_3": 0.047390752639669916,
+    "golden_run_4": 0.6827316783526616,
+    "golden_run_5": 0.04490869125901553,
+    "golden_run_6": 0.052934957339686006,
+    "golden_run_7": 0.06831163445555746,
+    "golden_run_8": 0.07411331265864061,
+    "golden_run_9": 2.3350347051797677
+   }
+  },
+  "odometry + radio flow": {
+   "aligned": {
+    "golden_run_1": 0.03453730930143042,
+    "golden_run_10": 0.1884314339324228,
+    "golden_run_11": 0.15194719686645922,
+    "golden_run_12": 0.13345578549848114,
+    "golden_run_2": 0.027796108349732507,
+    "golden_run_3": 0.024804458394605072,
+    "golden_run_4": 2.382141844974915,
+    "golden_run_5": 0.13858711227038698,
+    "golden_run_6": 0.030273617228858834,
+    "golden_run_7": 0.4364957077238532,
+    "golden_run_8": 0.06732537187914546,
+    "golden_run_9": 2.1871042839404264
+   },
+   "causal": {
+    "golden_run_1": 0.032168531885235295,
+    "golden_run_10": 0.21103350614226168,
+    "golden_run_11": 0.16867703052323038,
+    "golden_run_12": 0.1467802164610937,
+    "golden_run_2": 0.03707163153246087,
+    "golden_run_3": 0.02433885198824066,
+    "golden_run_4": 2.44653628372857,
+    "golden_run_5": 0.10960135061857312,
+    "golden_run_6": 0.039335061128288364,
+    "golden_run_7": 0.33415397093153026,
+    "golden_run_8": 0.11370426325927675,
+    "golden_run_9": 2.2360022317004025
+   },
+   "online": {
+    "golden_run_1": 0.06666831158325077,
+    "golden_run_10": 0.46789581212342995,
+    "golden_run_11": 0.2828478400193503,
+    "golden_run_12": 0.4183485932604343,
+    "golden_run_2": 0.06758692001249109,
+    "golden_run_3": 0.047942675405663104,
+    "golden_run_4": 3.6102801853455087,
+    "golden_run_5": 0.1836481334807646,
+    "golden_run_6": 0.17297457700590171,
+    "golden_run_7": 0.6991983961536515,
+    "golden_run_8": 0.18664595430822772,
+    "golden_run_9": 5.3251809157168815
+   },
+   "drift5": {
+    "golden_run_1": 0.06880554114937994,
+    "golden_run_10": 0.20963712390740896,
+    "golden_run_11": 0.18502623699145185,
+    "golden_run_12": 0.1611934693151171,
+    "golden_run_2": 0.05922938499195948,
+    "golden_run_3": 0.04448654997689585,
+    "golden_run_4": 3.3483460162764036,
+    "golden_run_5": 0.0707815720813905,
+    "golden_run_6": 0.05712435040098406,
+    "golden_run_7": 0.11105049320827225,
+    "golden_run_8": 0.07230419345163103,
+    "golden_run_9": 2.3711587764778455
+   }
+  },
+  "odometry + radio flow + raw revisits": {
+   "aligned": {
+    "golden_run_1": 0.03427891185609579,
+    "golden_run_10": 0.18635342647885908,
+    "golden_run_11": 0.15092601483729398,
+    "golden_run_12": 0.13334504190663155,
+    "golden_run_2": 0.027281845580637277,
+    "golden_run_3": 0.02474027593342004,
+    "golden_run_4": 2.3833296636456645,
+    "golden_run_5": 0.13861822738066965,
+    "golden_run_6": 0.02993935563899196,
+    "golden_run_7": 0.41040378935700367,
+    "golden_run_8": 0.06471080400938412,
+    "golden_run_9": 2.1862966526624796
+   },
+   "causal": {
+    "golden_run_1": 0.032168531885235295,
+    "golden_run_10": 0.21103350614226168,
+    "golden_run_11": 0.16867703052323038,
+    "golden_run_12": 0.1467802164610937,
+    "golden_run_2": 0.03707163153246087,
+    "golden_run_3": 0.02433885198824066,
+    "golden_run_4": 2.44653628372857,
+    "golden_run_5": 0.10960135061857312,
+    "golden_run_6": 0.039335061128288364,
+    "golden_run_7": 0.33415397093153026,
+    "golden_run_8": 0.11370426325927675,
+    "golden_run_9": 2.2360022317004025
+   },
+   "online": {
+    "golden_run_1": 0.06666831158325077,
+    "golden_run_10": 0.46789581212342995,
+    "golden_run_11": 0.2828478400193503,
+    "golden_run_12": 0.4183485932604343,
+    "golden_run_2": 0.06758692001249109,
+    "golden_run_3": 0.047942675405663104,
+    "golden_run_4": 3.6102801853455087,
+    "golden_run_5": 0.1836481334807646,
+    "golden_run_6": 0.17297457700590171,
+    "golden_run_7": 0.6991983961536515,
+    "golden_run_8": 0.18664595430822772,
+    "golden_run_9": 5.3251809157168815
+   },
+   "drift5": {
+    "golden_run_1": 0.06790324837087643,
+    "golden_run_10": 0.20989747162032932,
+    "golden_run_11": 0.1840456451344404,
+    "golden_run_12": 0.1611307043779753,
+    "golden_run_2": 0.05926874457490287,
+    "golden_run_3": 0.04590812682595647,
+    "golden_run_4": 3.3576986339983317,
+    "golden_run_5": 0.07309160044750539,
+    "golden_run_6": 0.05642898022939697,
+    "golden_run_7": 0.10524994237844348,
+    "golden_run_8": 0.07240630896452048,
+    "golden_run_9": 2.380309266689737
+   }
+  },
+  "odometry in the solver, no WiFi": {
+   "aligned": {
+    "golden_run_1": 0.03193124520623308,
+    "golden_run_10": 0.17568985402764578,
+    "golden_run_11": 0.16681029216574814,
+    "golden_run_12": 0.12389692652262231,
+    "golden_run_2": 0.030154742064159256,
+    "golden_run_3": 0.02311430377739618,
+    "golden_run_4": 2.549917117607633,
+    "golden_run_5": 0.040486505336408025,
+    "golden_run_6": 0.03487492980434166,
+    "golden_run_7": 0.31573721561922197,
+    "golden_run_8": 0.06496361530169134,
+    "golden_run_9": 2.234131865978794
+   },
+   "causal": {
+    "golden_run_1": 0.03193124520623308,
+    "golden_run_10": 0.17568985402764578,
+    "golden_run_11": 0.16681029216574814,
+    "golden_run_12": 0.12389692652262231,
+    "golden_run_2": 0.030154742064159256,
+    "golden_run_3": 0.02311430377739618,
+    "golden_run_4": 2.549917117607633,
+    "golden_run_5": 0.040486505336408025,
+    "golden_run_6": 0.03487492980434166,
+    "golden_run_7": 0.31573721561922197,
+    "golden_run_8": 0.06496361530169134,
+    "golden_run_9": 2.234131865978794
+   },
+   "online": {
+    "golden_run_1": 0.06427750312390665,
+    "golden_run_10": 0.37489115213538776,
+    "golden_run_11": 0.27770932883274296,
+    "golden_run_12": 0.4364976358213544,
+    "golden_run_2": 0.05353512634293614,
+    "golden_run_3": 0.043929062821700206,
+    "golden_run_4": 3.6163773387329385,
+    "golden_run_5": 0.04700231263167454,
+    "golden_run_6": 0.13089361344183573,
+    "golden_run_7": 0.7108784019375061,
+    "golden_run_8": 0.12496493485381137,
+    "golden_run_9": 5.44238063098674
+   },
+   "drift5": {
+    "golden_run_1": 0.058063854227449585,
+    "golden_run_10": 0.21439620556904593,
+    "golden_run_11": 0.19767645677208645,
+    "golden_run_12": 0.13482267741863724,
+    "golden_run_2": 0.05918430502930949,
+    "golden_run_3": 0.04739075262862177,
+    "golden_run_4": 3.5164499912378795,
+    "golden_run_5": 0.04471670012155347,
+    "golden_run_6": 0.06012743516381582,
+    "golden_run_7": 0.06831161362760711,
+    "golden_run_8": 0.07750225994863189,
+    "golden_run_9": 2.3350351839790586
+   }
+  },
+  "radio flow + abs, 3-scan average": {
+   "aligned": {
+    "golden_run_1": 0.8921125828188909,
+    "golden_run_10": 1.9906576658547142,
+    "golden_run_11": 1.7114374057063249,
+    "golden_run_12": 1.1693072537277027,
+    "golden_run_2": 1.778435007546996,
+    "golden_run_3": 0.5635066343514599,
+    "golden_run_4": 0.7185482371531128,
+    "golden_run_5": 2.7473868558228998,
+    "golden_run_6": 0.8440512935323161,
+    "golden_run_7": 2.8620848212627474,
+    "golden_run_8": 1.4795416005493855,
+    "golden_run_9": 1.1715286391820914
+   },
+   "causal": {
+    "golden_run_1": 1.243322479106947,
+    "golden_run_10": 2.474298724520675,
+    "golden_run_11": 2.11290411276291,
+    "golden_run_12": 2.022050613604876,
+    "golden_run_2": 3.008120488037554,
+    "golden_run_3": 0.9976196444420115,
+    "golden_run_4": 2.159953742316438,
+    "golden_run_5": 3.382520077809337,
+    "golden_run_6": 1.405714561332009,
+    "golden_run_7": 3.106128502139761,
+    "golden_run_8": 2.440970469480424,
+    "golden_run_9": 1.795482017814189
+   },
+   "online": {
+    "golden_run_1": 4.0448694937374645,
+    "golden_run_10": 8.459396757658034,
+    "golden_run_11": 5.705299601312966,
+    "golden_run_12": 10.46224060056302,
+    "golden_run_2": 11.955113711525719,
+    "golden_run_3": 1.6205548471866458,
+    "golden_run_4": 10.442748736013792,
+    "golden_run_5": 7.622582733575983,
+    "golden_run_6": 3.903199738506195,
+    "golden_run_7": 14.918321772201642,
+    "golden_run_8": 7.164954279752419,
+    "golden_run_9": 6.744230116902543
+   },
+   "drift5": {
+    "golden_run_1": 2.1044252943871435,
+    "golden_run_10": 3.1240358093303815,
+    "golden_run_11": 2.173432294976848,
+    "golden_run_12": 1.8225631295811784,
+    "golden_run_2": 3.188689144360952,
+    "golden_run_3": 1.4680989872693895,
+    "golden_run_4": 1.4583040724384686,
+    "golden_run_5": 3.3620955131646415,
+    "golden_run_6": 1.5480370548741558,
+    "golden_run_7": 2.500819254430075,
+    "golden_run_8": 1.9747755521632573,
+    "golden_run_9": 1.873434451691623
+   }
+  },
+  "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+   "aligned": {
+    "golden_run_1": 0.8161454871719976,
+    "golden_run_10": 1.6516136280566605,
+    "golden_run_11": 1.8675639564756814,
+    "golden_run_12": 1.1364902403824468,
+    "golden_run_2": 1.781366119821446,
+    "golden_run_3": 0.5700979302780144,
+    "golden_run_4": 0.8071731545632584,
+    "golden_run_5": 2.834817071305969,
+    "golden_run_6": 0.8935426530770543,
+    "golden_run_7": 2.9436033063918057,
+    "golden_run_8": 1.186529415677403,
+    "golden_run_9": 1.1662385044462518
+   },
+   "causal": {
+    "golden_run_1": 1.243322479106947,
+    "golden_run_10": 2.474298724520675,
+    "golden_run_11": 2.11290411276291,
+    "golden_run_12": 2.022050613604876,
+    "golden_run_2": 3.008120488037554,
+    "golden_run_3": 0.9976196444420115,
+    "golden_run_4": 2.159953742316438,
+    "golden_run_5": 3.382520077809337,
+    "golden_run_6": 1.405714561332009,
+    "golden_run_7": 3.106128502139761,
+    "golden_run_8": 2.440970469480424,
+    "golden_run_9": 1.795482017814189
+   },
+   "online": {
+    "golden_run_1": 4.0448694937374645,
+    "golden_run_10": 8.459396757658034,
+    "golden_run_11": 5.705299601312966,
+    "golden_run_12": 10.46224060056302,
+    "golden_run_2": 11.955113711525719,
+    "golden_run_3": 1.6205548471866458,
+    "golden_run_4": 10.442748736013792,
+    "golden_run_5": 7.622582733575983,
+    "golden_run_6": 3.903199738506195,
+    "golden_run_7": 14.918321772201642,
+    "golden_run_8": 7.164954279752419,
+    "golden_run_9": 6.744230116902543
+   },
+   "drift5": {
+    "golden_run_1": 1.954583476821143,
+    "golden_run_10": 2.7239940739968542,
+    "golden_run_11": 2.071004751303613,
+    "golden_run_12": 2.045771891582264,
+    "golden_run_2": 3.1857475283179206,
+    "golden_run_3": 1.569732081186557,
+    "golden_run_4": 1.5878527823865234,
+    "golden_run_5": 3.3432472737780627,
+    "golden_run_6": 1.5760605519548625,
+    "golden_run_7": 2.447496430810707,
+    "golden_run_8": 1.8770351525181919,
+    "golden_run_9": 1.9009597429311433
+   }
+  },
+  "radio flow, 3-scan average": {
+   "aligned": {
+    "golden_run_1": 0.8724156165906268,
+    "golden_run_10": 2.2490573092699955,
+    "golden_run_11": 1.9170360914235154,
+    "golden_run_12": 1.8094601668176284,
+    "golden_run_2": 1.666245916232679,
+    "golden_run_3": 0.5450462147163431,
+    "golden_run_4": 1.532877285783347,
+    "golden_run_5": 2.4960349353224713,
+    "golden_run_6": 0.7432699544920786,
+    "golden_run_7": 3.6307770084518434,
+    "golden_run_8": 1.7027403383279143,
+    "golden_run_9": 1.68472212062924
+   },
+   "causal": {
+    "golden_run_1": 1.2333376364704822,
+    "golden_run_10": 3.63521524756554,
+    "golden_run_11": 3.0500864085802917,
+    "golden_run_12": 2.4037021340966054,
+    "golden_run_2": 3.031691971597759,
+    "golden_run_3": 0.9938315748839236,
+    "golden_run_4": 2.271886132975967,
+    "golden_run_5": 3.2313367930254047,
+    "golden_run_6": 1.5832428298066314,
+    "golden_run_7": 4.154045048788,
+    "golden_run_8": 3.3841290929300913,
+    "golden_run_9": 1.8388812232995315
+   },
+   "online": {
+    "golden_run_1": 4.429821244781693,
+    "golden_run_10": 10.802460747152317,
+    "golden_run_11": 10.746177061553857,
+    "golden_run_12": 13.727797641507246,
+    "golden_run_2": 11.186479374302394,
+    "golden_run_3": 2.688560102283255,
+    "golden_run_4": 6.568000376115227,
+    "golden_run_5": 4.642381965180146,
+    "golden_run_6": 5.950196659349925,
+    "golden_run_7": 22.623036380752854,
+    "golden_run_8": 7.337134879397657,
+    "golden_run_9": 5.346574642296442
+   },
+   "drift5": {
+    "golden_run_1": 1.6664262993114551,
+    "golden_run_10": 2.760330052049755,
+    "golden_run_11": 2.299898934949577,
+    "golden_run_12": 2.5373231383524915,
+    "golden_run_2": 3.261479417892391,
+    "golden_run_3": 1.150985887972339,
+    "golden_run_4": 2.289189414003779,
+    "golden_run_5": 3.0149624066369447,
+    "golden_run_6": 1.617403809559782,
+    "golden_run_7": 2.493611682279276,
+    "golden_run_8": 2.1485951452234984,
+    "golden_run_9": 1.9261707135670287
+   }
+  },
+  "radio flow, 3-scan average + learned revisits": {
+   "aligned": {
+    "golden_run_1": 0.8647135882384983,
+    "golden_run_10": 2.103477853628223,
+    "golden_run_11": 2.0970905085023452,
+    "golden_run_12": 1.7153050491643438,
+    "golden_run_2": 1.718849480535056,
+    "golden_run_3": 0.5245800787974482,
+    "golden_run_4": 1.684311574157048,
+    "golden_run_5": 2.432107390652575,
+    "golden_run_6": 0.7593473549709521,
+    "golden_run_7": 3.417053768882953,
+    "golden_run_8": 1.6857943519023832,
+    "golden_run_9": 1.8290071437656434
+   },
+   "causal": {
+    "golden_run_1": 1.2333376364704822,
+    "golden_run_10": 3.63521524756554,
+    "golden_run_11": 3.0500864085802917,
+    "golden_run_12": 2.4037021340966054,
+    "golden_run_2": 3.031691971597759,
+    "golden_run_3": 0.9938315748839236,
+    "golden_run_4": 2.271886132975967,
+    "golden_run_5": 3.2313367930254047,
+    "golden_run_6": 1.5832428298066314,
+    "golden_run_7": 4.154045048788,
+    "golden_run_8": 3.3841290929300913,
+    "golden_run_9": 1.8388812232995315
+   },
+   "online": {
+    "golden_run_1": 4.429821244781693,
+    "golden_run_10": 10.802460747152317,
+    "golden_run_11": 10.746177061553857,
+    "golden_run_12": 13.727797641507246,
+    "golden_run_2": 11.186479374302394,
+    "golden_run_3": 2.688560102283255,
+    "golden_run_4": 6.568000376115227,
+    "golden_run_5": 4.642381965180146,
+    "golden_run_6": 5.950196659349925,
+    "golden_run_7": 22.623036380752854,
+    "golden_run_8": 7.337134879397657,
+    "golden_run_9": 5.346574642296442
+   },
+   "drift5": {
+    "golden_run_1": 1.653722815691679,
+    "golden_run_10": 2.675460471313181,
+    "golden_run_11": 2.4737886995569176,
+    "golden_run_12": 2.4763288855118613,
+    "golden_run_2": 3.1298007577888494,
+    "golden_run_3": 1.2270426797445022,
+    "golden_run_4": 2.453011323754215,
+    "golden_run_5": 2.984007174770315,
+    "golden_run_6": 1.8034421707365773,
+    "golden_run_7": 2.455102228453519,
+    "golden_run_8": 2.167542916538966,
+    "golden_run_9": 2.138134733043471
+   }
+  },
+  "radio flow, 3-scan average + raw revisits": {
+   "aligned": {
+    "golden_run_1": 0.8473554891092411,
+    "golden_run_10": 2.1920653686476297,
+    "golden_run_11": 1.8922180227031797,
+    "golden_run_12": 1.4188195310261627,
+    "golden_run_2": 1.7285268516208543,
+    "golden_run_3": 0.5177353573219813,
+    "golden_run_4": 1.7584834910837177,
+    "golden_run_5": 2.240965537427505,
+    "golden_run_6": 0.716437824190891,
+    "golden_run_7": 3.5826788801286633,
+    "golden_run_8": 1.454028350209325,
+    "golden_run_9": 1.8142385987123735
+   },
+   "causal": {
+    "golden_run_1": 1.2333376364704822,
+    "golden_run_10": 3.63521524756554,
+    "golden_run_11": 3.0500864085802917,
+    "golden_run_12": 2.4037021340966054,
+    "golden_run_2": 3.031691971597759,
+    "golden_run_3": 0.9938315748839236,
+    "golden_run_4": 2.271886132975967,
+    "golden_run_5": 3.2313367930254047,
+    "golden_run_6": 1.5832428298066314,
+    "golden_run_7": 4.154045048788,
+    "golden_run_8": 3.3841290929300913,
+    "golden_run_9": 1.8388812232995315
+   },
+   "online": {
+    "golden_run_1": 4.429821244781693,
+    "golden_run_10": 10.802460747152317,
+    "golden_run_11": 10.746177061553857,
+    "golden_run_12": 13.727797641507246,
+    "golden_run_2": 11.186479374302394,
+    "golden_run_3": 2.688560102283255,
+    "golden_run_4": 6.568000376115227,
+    "golden_run_5": 4.642381965180146,
+    "golden_run_6": 5.950196659349925,
+    "golden_run_7": 22.623036380752854,
+    "golden_run_8": 7.337134879397657,
+    "golden_run_9": 5.346574642296442
+   },
+   "drift5": {
+    "golden_run_1": 1.6580464716818029,
+    "golden_run_10": 2.5944681186179235,
+    "golden_run_11": 2.3440628074727075,
+    "golden_run_12": 2.1644159230229207,
+    "golden_run_2": 3.1665012269836836,
+    "golden_run_3": 1.115441262447697,
+    "golden_run_4": 2.7648390687003563,
+    "golden_run_5": 2.9086157297628574,
+    "golden_run_6": 1.6302657155416995,
+    "golden_run_7": 2.4929881470316104,
+    "golden_run_8": 2.223382875305424,
+    "golden_run_9": 1.9961768441591314
+   }
+  },
+  "radio flow, single scans": {
+   "aligned": {
+    "golden_run_1": 0.9098822645754542,
+    "golden_run_10": 2.5654596817152484,
+    "golden_run_11": 1.7987345527650114,
+    "golden_run_12": 1.2663654767013741,
+    "golden_run_2": 1.75982170367028,
+    "golden_run_3": 0.5368316134233868,
+    "golden_run_4": 1.2415792819995326,
+    "golden_run_5": 2.581137883369959,
+    "golden_run_6": 1.0529455999572297,
+    "golden_run_7": 2.993760450357365,
+    "golden_run_8": 0.9684096371867726,
+    "golden_run_9": 1.3784930382157583
+   },
+   "causal": {
+    "golden_run_1": 1.0742184131933452,
+    "golden_run_10": 3.255841385330122,
+    "golden_run_11": 2.07296906282167,
+    "golden_run_12": 2.363784981283952,
+    "golden_run_2": 3.153842813534965,
+    "golden_run_3": 0.9495545749089419,
+    "golden_run_4": 2.203866209442763,
+    "golden_run_5": 2.9006998028762694,
+    "golden_run_6": 1.5526890579302728,
+    "golden_run_7": 2.633099201517349,
+    "golden_run_8": 2.6558370279328813,
+    "golden_run_9": 1.9654912640695958
+   },
+   "online": {
+    "golden_run_1": 2.8498946350230283,
+    "golden_run_10": 7.843659573595971,
+    "golden_run_11": 4.342594764985598,
+    "golden_run_12": 6.773531367345424,
+    "golden_run_2": 10.31853150850249,
+    "golden_run_3": 1.8899113346206817,
+    "golden_run_4": 6.9561881426096726,
+    "golden_run_5": 5.216131474642439,
+    "golden_run_6": 4.5391270168889575,
+    "golden_run_7": 16.080993051205187,
+    "golden_run_8": 7.954506609847248,
+    "golden_run_9": 5.068878096093823
+   },
+   "drift5": {
+    "golden_run_1": 1.7719147800313995,
+    "golden_run_10": 3.1251632787576793,
+    "golden_run_11": 2.3236215554402633,
+    "golden_run_12": 1.9740298908756906,
+    "golden_run_2": 3.279610253930597,
+    "golden_run_3": 1.4886082936125302,
+    "golden_run_4": 2.1099947442514706,
+    "golden_run_5": 3.053894629836775,
+    "golden_run_6": 2.2184207297017053,
+    "golden_run_7": 1.860271313829893,
+    "golden_run_8": 1.7695956625562757,
+    "golden_run_9": 2.0357012641924306
+   }
+  },
+  "v1 DPRO": {
+   "aligned": {
+    "golden_run_1": 0.9013702399049206,
+    "golden_run_10": 2.0603600790929226,
+    "golden_run_11": 1.4206184691480825,
+    "golden_run_12": 1.624002526263733,
+    "golden_run_2": 1.8193109396349447,
+    "golden_run_3": 0.5986504968052624,
+    "golden_run_4": 1.0096947787081139,
+    "golden_run_5": 3.0029343791954997,
+    "golden_run_6": 0.8562239094871912,
+    "golden_run_7": 2.6113534332552373,
+    "golden_run_8": 1.179515857320179,
+    "golden_run_9": 1.244674044950692
+   },
+   "causal": {
+    "golden_run_1": 1.1847026807760028,
+    "golden_run_10": 1.84308910220598,
+    "golden_run_11": 1.8512944682373598,
+    "golden_run_12": 1.8675796258788933,
+    "golden_run_2": 2.5586875248045624,
+    "golden_run_3": 0.9229622154584516,
+    "golden_run_4": 2.045835947467789,
+    "golden_run_5": 3.195668041095749,
+    "golden_run_6": 1.221551856268472,
+    "golden_run_7": 3.1620651392744046,
+    "golden_run_8": 1.4080887940357725,
+    "golden_run_9": 1.8779067236647964
+   },
+   "online": {
+    "golden_run_1": 3.59683950357933,
+    "golden_run_10": 7.824788442942317,
+    "golden_run_11": 7.836671132433482,
+    "golden_run_12": 8.534493166523152,
+    "golden_run_2": 10.967701179501237,
+    "golden_run_3": 1.5104277642473138,
+    "golden_run_4": 9.059862066071027,
+    "golden_run_5": 6.899381929526734,
+    "golden_run_6": 3.018966177072423,
+    "golden_run_7": 17.365905064522103,
+    "golden_run_8": 4.5951240419327215,
+    "golden_run_9": 6.061287096780906
+   },
+   "drift5": {
+    "golden_run_1": 2.0926960984030543,
+    "golden_run_10": 2.219677845269504,
+    "golden_run_11": 1.9542765305296104,
+    "golden_run_12": 1.7707611213459584,
+    "golden_run_2": 2.857109027650774,
+    "golden_run_3": 1.6441820710113,
+    "golden_run_4": 1.8601874855721252,
+    "golden_run_5": 4.125192313735258,
+    "golden_run_6": 1.5218722137441967,
+    "golden_run_7": 1.8680891777806454,
+    "golden_run_8": 1.95658380405112,
+    "golden_run_9": 1.4615908269551194
+   }
+  },
+  "v1 network off": {
+   "aligned": {
+    "golden_run_1": 0.9066408823728537,
+    "golden_run_10": 2.706903569239472,
+    "golden_run_11": 2.976522991764778,
+    "golden_run_12": 3.0890116743348393,
+    "golden_run_2": 1.6567327590037397,
+    "golden_run_3": 0.6136567804229377,
+    "golden_run_4": 2.1853557942457003,
+    "golden_run_5": 2.970449334336658,
+    "golden_run_6": 1.6676596841166058,
+    "golden_run_7": 9.104427251700203,
+    "golden_run_8": 2.1426667158860684,
+    "golden_run_9": 2.412488598196972
+   },
+   "causal": {
+    "golden_run_1": 1.4530518292223091,
+    "golden_run_10": 2.312266801413594,
+    "golden_run_11": 4.071701067807885,
+    "golden_run_12": 2.8042770365554794,
+    "golden_run_2": 2.1985722320584093,
+    "golden_run_3": 0.7488542369183806,
+    "golden_run_4": 2.633380098035436,
+    "golden_run_5": 2.7172893196832373,
+    "golden_run_6": 1.8235188847894686,
+    "golden_run_7": 6.876292586080246,
+    "golden_run_8": 1.8685784811290376,
+    "golden_run_9": 2.8374340440050205
+   },
+   "online": {
+    "golden_run_1": 2.813684766204218,
+    "golden_run_10": 12.218428400475622,
+    "golden_run_11": 9.802762785387591,
+    "golden_run_12": 6.7872721990838665,
+    "golden_run_2": 4.524696750154159,
+    "golden_run_3": 2.0696073080631217,
+    "golden_run_4": 5.67369892954392,
+    "golden_run_5": 4.6591889629846825,
+    "golden_run_6": 2.8347845935093705,
+    "golden_run_7": 17.97909017283484,
+    "golden_run_8": 5.281510754984986,
+    "golden_run_9": 5.012891352298081
+   },
+   "drift5": {
+    "golden_run_1": 1.8061352284347618,
+    "golden_run_10": 3.0665186777552336,
+    "golden_run_11": 3.711232234269684,
+    "golden_run_12": 3.5828084592253187,
+    "golden_run_2": 3.2481938935102543,
+    "golden_run_3": 0.9720874942250282,
+    "golden_run_4": 3.3607033271720703,
+    "golden_run_5": 3.907417291334619,
+    "golden_run_6": 2.7322890486426643,
+    "golden_run_7": 5.045753146974048,
+    "golden_run_8": 3.2446299892271746,
+    "golden_run_9": 3.1361499176728636
+   }
+  },
+  "v1 network off, tuned": {
+   "aligned": {
+    "golden_run_1": 0.9020874051429679,
+    "golden_run_10": 1.4897743663662764,
+    "golden_run_11": 1.2350651104404886,
+    "golden_run_12": 1.3169726011620704,
+    "golden_run_2": 1.7301835672173507,
+    "golden_run_3": 0.603379387387399,
+    "golden_run_4": 0.7704979340921395,
+    "golden_run_5": 2.7811202769063086,
+    "golden_run_6": 0.7752531464556028,
+    "golden_run_7": 3.4569966351648667,
+    "golden_run_8": 1.2690882766451628,
+    "golden_run_9": 1.2611663212715725
+   },
+   "causal": {
+    "golden_run_1": 1.266423212563393,
+    "golden_run_10": 2.021391322532327,
+    "golden_run_11": 1.2052842927338245,
+    "golden_run_12": 2.251121229595354,
+    "golden_run_2": 3.027354569662414,
+    "golden_run_3": 1.0217905068667268,
+    "golden_run_4": 2.2479956473551312,
+    "golden_run_5": 3.696959620222003,
+    "golden_run_6": 1.471897816646658,
+    "golden_run_7": 4.062822468630313,
+    "golden_run_8": 2.4268778786782166,
+    "golden_run_9": 2.1120422612453336
+   },
+   "online": {
+    "golden_run_1": 4.5128560186490105,
+    "golden_run_10": 10.375667893477711,
+    "golden_run_11": 2.069983632957379,
+    "golden_run_12": 12.274485245699571,
+    "golden_run_2": 11.43484731739192,
+    "golden_run_3": 1.537272930852918,
+    "golden_run_4": 5.801404702274085,
+    "golden_run_5": 7.394122434608992,
+    "golden_run_6": 3.9758944598284773,
+    "golden_run_7": 25.005545497167265,
+    "golden_run_8": 6.54273193667403,
+    "golden_run_9": 8.922723386057962
+   },
+   "drift5": {
+    "golden_run_1": 2.0839077468734195,
+    "golden_run_10": 2.273100410797293,
+    "golden_run_11": 1.479431519177325,
+    "golden_run_12": 1.6602981303527848,
+    "golden_run_2": 3.072383821766137,
+    "golden_run_3": 1.7279405971228954,
+    "golden_run_4": 1.57855058365481,
+    "golden_run_5": 3.8393582370380996,
+    "golden_run_6": 1.6808166053731817,
+    "golden_run_7": 2.422997552754747,
+    "golden_run_8": 1.644542677072107,
+    "golden_run_9": 1.5647862171756826
+   }
+  },
+  "wheel odometry": {
+   "aligned": {
+    "golden_run_1": 0.03193206005795096,
+    "golden_run_10": 0.1757316571285461,
+    "golden_run_11": 0.1661150875011287,
+    "golden_run_12": 0.12389683486398322,
+    "golden_run_2": 0.03015422348431621,
+    "golden_run_3": 0.023114303490145153,
+    "golden_run_4": 2.549917443449079,
+    "golden_run_5": 0.0413628233422613,
+    "golden_run_6": 0.03157852093831342,
+    "golden_run_7": 0.3157371513504655,
+    "golden_run_8": 0.05820002719903119,
+    "golden_run_9": 2.2341321776105465
+   },
+   "causal": {
+    "golden_run_1": 0.03193206005795096,
+    "golden_run_10": 0.1757316571285461,
+    "golden_run_11": 0.1661150875011287,
+    "golden_run_12": 0.12389683486398322,
+    "golden_run_2": 0.03015422348431621,
+    "golden_run_3": 0.023114303490145153,
+    "golden_run_4": 2.549917443449079,
+    "golden_run_5": 0.0413628233422613,
+    "golden_run_6": 0.03157852093831342,
+    "golden_run_7": 0.3157371513504655,
+    "golden_run_8": 0.05820002719903119,
+    "golden_run_9": 2.2341321776105465
+   },
+   "online": {
+    "golden_run_1": 0.06426944380175353,
+    "golden_run_10": 0.37338125315086035,
+    "golden_run_11": 0.2751584187080354,
+    "golden_run_12": 0.4364972379521664,
+    "golden_run_2": 0.053536288681687846,
+    "golden_run_3": 0.043929063287553305,
+    "golden_run_4": 3.616336984814943,
+    "golden_run_5": 0.050238009998135776,
+    "golden_run_6": 0.061041275105422704,
+    "golden_run_7": 0.7108778277673018,
+    "golden_run_8": 0.10448810097597343,
+    "golden_run_9": 5.442377660278222
+   },
+   "drift5": {
+    "golden_run_1": 0.058043105985464014,
+    "golden_run_10": 0.21446998861194722,
+    "golden_run_11": 0.19753347375157027,
+    "golden_run_12": 0.13482272205591783,
+    "golden_run_2": 0.05918430313708711,
+    "golden_run_3": 0.047390752639669916,
+    "golden_run_4": 3.516449012348111,
+    "golden_run_5": 0.04490869125901553,
+    "golden_run_6": 0.052934957339686006,
+    "golden_run_7": 0.06831163445555746,
+    "golden_run_8": 0.07411331265864061,
+    "golden_run_9": 2.3350347051797677
+   }
+  }
+ },
+ "wins": {
+  "WkNN + radio map": {
+   "v1 network off, tuned": {
+    "aligned": 4,
+    "causal": 10,
+    "online": 8,
+    "drift5": 4
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 4,
+    "causal": 10,
+    "online": 10,
+    "drift5": 3
+   },
+   "motion rules only": {
+    "aligned": 10,
+    "causal": 11,
+    "online": 9,
+    "drift5": 11
+   }
+  },
+  "abs, all APs (v1 solver, no patches)": {
+   "v1 network off, tuned": {
+    "aligned": 6,
+    "causal": 6,
+    "online": 6,
+    "drift5": 7
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 5,
+    "causal": 3,
+    "online": 7,
+    "drift5": 7
+   },
+   "motion rules only": {
+    "aligned": 9,
+    "causal": 7,
+    "online": 10,
+    "drift5": 8
+   }
+  },
+  "ceiling: abs with true APs": {
+   "v1 network off, tuned": {
+    "aligned": 6,
+    "causal": 7,
+    "online": 9,
+    "drift5": 7
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 7,
+    "causal": 8,
+    "online": 8,
+    "drift5": 7
+   },
+   "motion rules only": {
+    "aligned": 8,
+    "causal": 6,
+    "online": 9,
+    "drift5": 8
+   }
+  },
+  "ceiling: odometry with the true gyro bias removed": {
+   "v1 network off, tuned": {
+    "aligned": 12,
+    "causal": 12,
+    "online": 12,
+    "drift5": 12
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 12,
+    "causal": 12,
+    "online": 12,
+    "drift5": 12
+   },
+   "motion rules only": {
+    "aligned": 12,
+    "causal": 12,
+    "online": 12,
+    "drift5": 12
+   }
+  },
+  "ceiling: radio flow with true APs": {
+   "v1 network off, tuned": {
+    "aligned": 6,
+    "causal": 8,
+    "online": 9,
+    "drift5": 6
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 5,
+    "causal": 7,
+    "online": 10,
+    "drift5": 7
+   },
+   "motion rules only": {
+    "aligned": 10,
+    "causal": 9,
+    "online": 10,
+    "drift5": 9
+   }
+  },
+  "learned update (also while streaming)": {
+   "v1 network off, tuned": {
+    "aligned": 8,
+    "causal": 9,
+    "online": 6,
+    "drift5": 8
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 8,
+    "causal": 5,
+    "online": 8,
+    "drift5": 9
+   },
+   "motion rules only": {
+    "aligned": 11,
+    "causal": 7,
+    "online": 8,
+    "drift5": 10
+   }
+  },
+  "learned update (final refinement)": {
+   "v1 network off, tuned": {
+    "aligned": 6,
+    "causal": 9,
+    "online": 6,
+    "drift5": 6
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 5,
+    "causal": 2,
+    "online": 4,
+    "drift5": 9
+   },
+   "motion rules only": {
+    "aligned": 10,
+    "causal": 7,
+    "online": 8,
+    "drift5": 10
+   }
+  },
+  "motion rules only": {
+   "v1 network off, tuned": {
+    "aligned": 2,
+    "causal": 6,
+    "online": 4,
+    "drift5": 4
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 2,
+    "causal": 5,
+    "online": 4,
+    "drift5": 1
+   }
+  },
+  "odometry + WiFi gyro-bias check": {
+   "v1 network off, tuned": {
+    "aligned": 11,
+    "causal": 10,
+    "online": 12,
+    "drift5": 11
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 11,
+    "causal": 10,
+    "online": 12,
+    "drift5": 11
+   },
+   "motion rules only": {
+    "aligned": 12,
+    "causal": 11,
+    "online": 12,
+    "drift5": 12
+   }
+  },
+  "odometry + radio flow": {
+   "v1 network off, tuned": {
+    "aligned": 10,
+    "causal": 10,
+    "online": 12,
+    "drift5": 10
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 10,
+    "causal": 10,
+    "online": 12,
+    "drift5": 10
+   },
+   "motion rules only": {
+    "aligned": 11,
+    "causal": 11,
+    "online": 12,
+    "drift5": 11
+   }
+  },
+  "odometry + radio flow + raw revisits": {
+   "v1 network off, tuned": {
+    "aligned": 10,
+    "causal": 10,
+    "online": 12,
+    "drift5": 10
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 10,
+    "causal": 10,
+    "online": 12,
+    "drift5": 10
+   },
+   "motion rules only": {
+    "aligned": 11,
+    "causal": 11,
+    "online": 12,
+    "drift5": 11
+   }
+  },
+  "odometry in the solver, no WiFi": {
+   "v1 network off, tuned": {
+    "aligned": 10,
+    "causal": 10,
+    "online": 12,
+    "drift5": 10
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 10,
+    "causal": 10,
+    "online": 12,
+    "drift5": 10
+   },
+   "motion rules only": {
+    "aligned": 11,
+    "causal": 11,
+    "online": 12,
+    "drift5": 11
+   }
+  },
+  "radio flow + abs, 3-scan average": {
+   "v1 network off, tuned": {
+    "aligned": 7,
+    "causal": 9,
+    "online": 6,
+    "drift5": 4
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 7,
+    "causal": 0,
+    "online": 0,
+    "drift5": 5
+   },
+   "motion rules only": {
+    "aligned": 10,
+    "causal": 7,
+    "online": 8,
+    "drift5": 10
+   }
+  },
+  "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+   "v1 network off, tuned": {
+    "aligned": 6,
+    "causal": 9,
+    "online": 6,
+    "drift5": 4
+   },
+   "motion rules only": {
+    "aligned": 10,
+    "causal": 7,
+    "online": 8,
+    "drift5": 11
+   }
+  },
+  "radio flow, 3-scan average": {
+   "v1 network off, tuned": {
+    "aligned": 5,
+    "causal": 4,
+    "online": 5,
+    "drift5": 4
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 4,
+    "causal": 3,
+    "online": 4,
+    "drift5": 3
+   },
+   "motion rules only": {
+    "aligned": 10,
+    "causal": 7,
+    "online": 5,
+    "drift5": 10
+   }
+  },
+  "radio flow, 3-scan average + learned revisits": {
+   "v1 network off, tuned": {
+    "aligned": 6,
+    "causal": 4,
+    "online": 5,
+    "drift5": 3
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 4,
+    "causal": 3,
+    "online": 4,
+    "drift5": 5
+   },
+   "motion rules only": {
+    "aligned": 11,
+    "causal": 7,
+    "online": 5,
+    "drift5": 9
+   }
+  },
+  "radio flow, 3-scan average + raw revisits": {
+   "v1 network off, tuned": {
+    "aligned": 5,
+    "causal": 4,
+    "online": 5,
+    "drift5": 4
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 4,
+    "causal": 3,
+    "online": 4,
+    "drift5": 5
+   },
+   "motion rules only": {
+    "aligned": 11,
+    "causal": 7,
+    "online": 5,
+    "drift5": 10
+   }
+  },
+  "radio flow, single scans": {
+   "v1 network off, tuned": {
+    "aligned": 5,
+    "causal": 6,
+    "online": 7,
+    "drift5": 4
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 5,
+    "causal": 5,
+    "online": 8,
+    "drift5": 6
+   },
+   "motion rules only": {
+    "aligned": 9,
+    "causal": 7,
+    "online": 8,
+    "drift5": 10
+   }
+  },
+  "v1 DPRO": {
+   "v1 network off, tuned": {
+    "aligned": 5,
+    "causal": 11,
+    "online": 10,
+    "drift5": 6
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 4,
+    "causal": 10,
+    "online": 10,
+    "drift5": 7
+   },
+   "motion rules only": {
+    "aligned": 10,
+    "causal": 9,
+    "online": 10,
+    "drift5": 8
+   }
+  },
+  "v1 network off": {
+   "v1 network off, tuned": {
+    "aligned": 1,
+    "causal": 4,
+    "online": 9,
+    "drift5": 2
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 1,
+    "causal": 5,
+    "online": 8,
+    "drift5": 2
+   },
+   "motion rules only": {
+    "aligned": 7,
+    "causal": 8,
+    "online": 9,
+    "drift5": 8
+   }
+  },
+  "v1 network off, tuned": {
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 6,
+    "causal": 3,
+    "online": 6,
+    "drift5": 8
+   },
+   "motion rules only": {
+    "aligned": 10,
+    "causal": 6,
+    "online": 8,
+    "drift5": 8
+   }
+  },
+  "wheel odometry": {
+   "v1 network off, tuned": {
+    "aligned": 10,
+    "causal": 10,
+    "online": 12,
+    "drift5": 10
+   },
+   "radio flow + abs, 3-scan average + raw revisits (phase 3 start)": {
+    "aligned": 10,
+    "causal": 10,
+    "online": 12,
+    "drift5": 10
+   },
+   "motion rules only": {
+    "aligned": 11,
+    "causal": 11,
+    "online": 12,
+    "drift5": 11
+   }
+  }
+ }
+}
