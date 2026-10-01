@@ -40,4 +40,4 @@ better (`encoder_odometry.py`).
 | `report/` | the results page (`build.py` assembles `template.html` + `report.js` + report data) |
 
 Small results are in `results/`; checkpoints and `rf_results.pkl` stay in `/root/navlori/runs/dpro` (WSL).
-Commands: see the "Reproduce" section of the report.
+Commands: see the "Reproduce" section of the report. The algorithm, with every equation and constant, is in `ALGORITHM.tex` (paste into Overleaf).
